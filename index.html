@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio de Luis Fernandes, développeur web. Projets, stack technique et contact."
+    />
+    <title>Luis Fernandes | Dev Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="logo" href="#top">LF.dev</a>
+      <nav>
+        <a href="#about">Profil</a>
+        <a href="#projects">Projets</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <p class="tag">Disponible pour missions freelance et CDI</p>
+        <h1>
+          Je construis des produits web
+          <span>rapides, robustes et pensés pour les utilisateurs.</span>
+        </h1>
+        <p class="hero-intro">
+          Bonjour, je suis <strong>Luis Fernandes</strong>, développeur orienté
+          front-end et performance. J'aide les équipes à livrer des interfaces
+          qui transforment.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">Voir mes projets</a>
+          <a class="btn btn-ghost" href="mailto:hello@ton-domaine.com"
+            >Me contacter</a
+          >
+        </div>
+      </section>
+
+      <section id="about" class="panel reveal">
+        <h2>Profil</h2>
+        <div class="about-grid">
+          <article>
+            <h3>Ce que j'apporte</h3>
+            <p>
+              Un mix de code propre, sens produit et obsession de la qualité.
+              Je pose une architecture claire, je documente et je livre vite.
+            </p>
+          </article>
+          <article>
+            <h3>Stack principale</h3>
+            <ul class="chips">
+              <li>TypeScript</li>
+              <li>React</li>
+              <li>Next.js</li>
+              <li>Node.js</li>
+              <li>PostgreSQL</li>
+              <li>CI/CD</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Focus</h3>
+            <p>
+              Design systems, optimisation Core Web Vitals, SEO technique et
+              intégration d'APIs métier.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="reveal">
+        <div class="section-head">
+          <h2>Projets sélectionnés</h2>
+          <p>Remplace ces exemples par tes projets réels.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <p class="project-type">SaaS B2B</p>
+            <h3>Ops Dashboard</h3>
+            <p>
+              Refonte front-end d'un dashboard logistique: temps de chargement
+              divisé par 3 et UX simplifiée pour les opérateurs.
+            </p>
+            <a href="#" aria-label="Voir le projet Ops Dashboard">Case study</a>
+          </article>
+          <article class="project-card">
+            <p class="project-type">E-commerce</p>
+            <h3>Headless Storefront</h3>
+            <p>
+              Migration vers une architecture headless avec un parcours mobile
+              optimisé et un checkout plus fiable.
+            </p>
+            <a href="#" aria-label="Voir le projet Headless Storefront"
+              >Case study</a
+            >
+          </article>
+          <article class="project-card">
+            <p class="project-type">Produit interne</p>
+            <h3>Design System Kit</h3>
+            <p>
+              Bibliothèque UI partagée pour harmoniser 4 produits et réduire le
+              temps de livraison des features.
+            </p>
+            <a href="#" aria-label="Voir le projet Design System Kit"
+              >Case study</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="panel reveal">
+        <h2>Contact</h2>
+        <p>
+          Pour une mission, une collaboration ou un poste, écris-moi directement.
+        </p>
+        <a class="btn btn-primary" href="mailto:hello@ton-domaine.com"
+          >hello@ton-domaine.com</a
+        >
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Luis Fernandes</p>
+      <a href="https://github.com/Luis1454" target="_blank" rel="noreferrer"
+        >GitHub</a
+      >
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
