@@ -203,7 +203,7 @@ p {
 .about-grid {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.9rem;
 }
 
@@ -239,7 +239,7 @@ p {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
 }
 
@@ -272,6 +272,26 @@ p {
   text-decoration: none;
   color: #115e59;
   font-weight: 700;
+}
+
+.timeline {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.timeline article {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-strong);
+  padding: 1rem;
+}
+
+.timeline-meta {
+  margin: 0.35rem 0 0.35rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: #444444;
 }
 
 footer {
