@@ -1,438 +1,416 @@
-/**
- * LF_CORE // Systems Engineering Portfolio
- * Production-ready, zero-dependency, high-performance implementation.
- */
+'use strict';
+/*
+  CoreEngine – zero‑dependency, high‑performance UI controller.
+  Responsibilities:
+    • Canvas telemetry particle system (off‑screen buffer, requestAnimationFrame).
+    • Scroll progress, back‑to‑top visibility, and lazy scroll listeners (passive).
+    • Command palette with fuzzy search (Levenshtein distance, O(n·m) for small lists).
+    • IntersectionObserver for reveal animations (hero, timeline, bento items).
+    • Dynamic project card generation (data‑driven, no duplication in markup).
+*/
 
-const SYSTEM_CONFIG = {
+// -------------------------------------------------------------------
+// Configuration & static data
+// -------------------------------------------------------------------
+const CONFIG = {
   colors: {
-    brand: '#00f2ff',
-    bg: '#09090b'
+    brand: getComputedStyle(document.documentElement).getPropertyValue('--brand').trim()
   },
   typewriter: [
-    "Initializing aerospace systems...",
-    "Calibrating telemetry pipelines...",
-    "Optimizing CUDA kernels...",
-    "Loading mission-critical modules...",
-    "SYSTEM_CORE: READY."
+    'Initializing telemetry pipeline...',
+    'Calibrating CUDA kernels...',
+    'Launching high‑throughput data streams...',
+    'SYSTEM_CORE: READY.'
   ],
-  projects: {
-    p1: {
-      title: "LBR Telemetry Receiver",
+  projects: [
+    {
+      title: 'LBR Telemetry Receiver',
+      img: 'https://picsum.photos/seed/aerospace1/800/600',
+      tags: ['CUDA','C++','SDR'],
       specs: [
-        { label: "Throughput", value: "12.5 Mbps" },
-        { label: "Latency", value: "< 10ms" },
-        { label: "Complexity", value: "O(n)" },
-        { label: "Precision", value: "Float64" }
+        {label: 'Throughput', value: '12.5 Mbps'},
+        {label: 'Latency', value: '< 10 ms'},
+        {label: 'Precision', value: 'Float64'}
       ],
-      tech: ["C++20", "SDR", "UDP/IP", "POSIX Threads"],
-      detail: "A high-performance reception pipeline designed for Long Beach Rocketry. Implements real-time frame reconstruction and checksum validation for high-velocity telemetry streams."
+      detail: 'Real‑time telemetry pipeline for long‑range rockets. Handles demodulation, error checking, and frame reconstruction.'
     },
-    p2: {
-      title: "Backlight N-body Engine",
+    {
+      title: 'Backlight N‑Body Engine',
+      img: 'https://picsum.photos/seed/hpc2/800/600',
+      tags: ['AVX2','C','SIMD'],
       specs: [
-        { label: "Bodies", value: "1000+" },
-        { label: "Precision", value: "128-bit" },
-        { label: "Performance", value: "60 FPS" },
-        { label: "Architecture", value: "SIMD Optimized" }
+        {label: 'Bodies', value: '1000+'},
+        {label: 'FPS', value: '60'},
+        {label: 'Precision', value: '128‑bit'}
       ],
-      tech: ["Pure C", "AVX2", "pthreads", "OpenGL"],
-      detail: "A cosmological simulation engine focusing on extreme precision and cache-local data structures to prevent floating-point drift in long-duration simulations."
+      detail: 'SIMD‑optimized astrophysics simulation delivering smooth 60 FPS with extended‑precision arithmetic.'
     },
-    p3: {
-      title: "Relativistic Raytracer",
+    {
+      title: 'Relativistic Raytracer',
+      img: 'https://picsum.photos/seed/physics3/800/600',
+      tags: ['CUDA','OptiX','GLSL'],
       specs: [
-        { label: "Model", value: "Schwarzschild" },
-        { label: "Acc", value: "NVIDIA OptiX" },
-        { label: "Physics", value: "Geodesic" },
-        { label: "Sampling", value: "4K Progressive" }
+        {label: 'Model', value: 'Schwarzschild'},
+        {label: 'Samples', value: '4K Progressive'}
       ],
-      tech: ["CUDA", "C++", "OptiX", "GLSL"],
-      detail: "A raytracer that simulates light bending in curved spacetime. Uses GPU-accelerated geodesic integration to render gravitationally lensed celestial objects."
+      detail: 'GPU‑accelerated ray‑tracer simulating light bending around massive objects using CUDA‑OptiX pipelines.'
     }
-  }
+  ]
 };
 
+// -------------------------------------------------------------------
+// Utility helpers – lightweight and pure JS
+// -------------------------------------------------------------------
+function debounce(fn, wait) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), wait);
+  };
+}
+
+function fuzzyScore(query, target) {
+  // Simple Levenshtein‑based scoring (lower = better). For short strings this is fine.
+  const m = query.length, n = target.length;
+  const dp = new Array(m + 1).fill(0).map((_, i) => i);
+  for (let j = 1; j <= n; j++) {
+    let prev = dp[0];
+    dp[0] = j;
+    for (let i = 1; i <= m; i++) {
+      const cur = dp[i];
+      const cost = query[i - 1] === target[j - 1] ? 0 : 1;
+      dp[i] = Math.min(dp[i - 1] + 1, dp[i] + 1, prev + cost);
+      prev = cur;
+    }
+  }
+  return dp[m];
+}
+
+function sortFuzzy(list, query) {
+  const lowered = query.toLowerCase();
+  return list
+    .map(item => ({item, score: fuzzyScore(lowered, item.toLowerCase())}))
+    .sort((a, b) => a.score - b.score)
+    .map(o => o.item);
+}
+
+// -------------------------------------------------------------------
+// Core Engine class
+// -------------------------------------------------------------------
 class CoreEngine {
   constructor() {
     this.state = {
-      cursor: { x: 0, y: 0 },
+      cursor: {x:0, y:0},
+      scrollY: 0,
       isPaletteOpen: false
     };
-
     this.init();
   }
 
   init() {
-    console.log("SYSTEM_CORE: Initializing...");
-    try {
-      document.body.classList.remove('js-disabled');
-
-      // Force visibility for critical elements to prevent fade-out
-      const heroContent = document.querySelector('.hero-content');
-      if (heroContent) {
-        heroContent.classList.add('visible');
-        heroContent.style.opacity = '1';
-      }
-
-      this.setupEventListeners();
-      this.initSpotlight();
-      this.initTypewriter();
-      this.initHeroCanvas();
-      this.initRevealObserver();
-      this.initMetrics();
-      this.initProjectModals();
-      this.initCommandPalette();
-
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      console.log("SYSTEM_CORE: Online.");
-    } catch (e) {
-      console.error("SYSTEM_CORE: Critical error during init:", e);
-      document.body.classList.add('js-disabled');
-    }
+    // Remove JS‑disabled class as soon as possible
+    document.body.classList.remove('js-disabled');
+    // Prepare UI components
+    this.setupEventListeners();
+    this.initSpotlight();
+    this.initTypewriter();
+    this.initHeroCanvas();
+    this.initRevealObserver();
+    this.renderProjects();
+    this.initCommandPalette();
+    this.initTimeline();
+    // Set initial year (footer may need it later)
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
+  // -----------------------------------------------------------------
+  // Global event handling – passive wherever possible
+  // -----------------------------------------------------------------
   setupEventListeners() {
-    window.addEventListener('mousemove', (e) => {
+    // Mouse move – cursor tracking for radial gradient spotlight
+    window.addEventListener('mousemove', e => {
       this.state.cursor.x = e.clientX;
       this.state.cursor.y = e.clientY;
       this.updateSpotlight();
-    });
+    }, {passive:true});
 
-    window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    // Scroll – progress bar & back‑to‑top visibility (throttled)
+    const onScroll = debounce(() => {
+      this.state.scrollY = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const percent = docHeight > 0 ? (this.state.scrollY / docHeight) * 100 : 0;
+      document.documentElement.style.setProperty('--scroll-percent', `${percent}%`);
+      const backBtn = document.querySelector('.back-to-top');
+      if (backBtn) {
+        if (this.state.scrollY > 300) backBtn.classList.add('show');
+        else backBtn.classList.remove('show');
+      }
+    }, 50);
+    window.addEventListener('scroll', onScroll, {passive:true});
+
+    // Keyboard shortcuts – Cmd/Ctrl+K for palette
+    window.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         this.togglePalette();
       }
     });
-
-    // Scroll progress bar and back-to-top button
-    const scrollHandler = () => {
-      const scrollY = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const percent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-      document.documentElement.style.setProperty('--scroll-percent', `${percent}%`);
-      const backBtn = document.querySelector('.back-to-top');
-      if (backBtn) {
-        backBtn.style.opacity = scrollY > 300 ? '1' : '0';
-        backBtn.style.pointerEvents = scrollY > 300 ? 'auto' : 'none';
-      }
-    };
-    window.addEventListener('scroll', scrollHandler);
-
-    // Theme toggle button
-    const themeBtn = document.querySelector('.theme-toggle');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', () => {
-        const root = document.documentElement;
-        const current = root.getAttribute('data-theme');
-        const newTheme = current === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', newTheme);
-        themeBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-      });
-    }
-
-    // Back-to-top button click
-    const backBtn = document.querySelector('.back-to-top');
-    if (backBtn) {
-      backBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
   }
 
+  // -----------------------------------------------------------------
+  // Spotlight – CSS custom properties driven radial gradient
+  // -----------------------------------------------------------------
+  initSpotlight() {
+    // Initial assignment
+    this.updateSpotlight();
+  }
   updateSpotlight() {
     document.documentElement.style.setProperty('--x', `${this.state.cursor.x}px`);
     document.documentElement.style.setProperty('--y', `${this.state.cursor.y}px`);
   }
 
+  // -----------------------------------------------------------------
+  // Typewriter – minimal setTimeout loop (no heavy libs)
+  // -----------------------------------------------------------------
   initTypewriter() {
     const el = document.getElementById('typewriter');
     if (!el) return;
-    let lineIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-
-    const type = () => {
-      const currentLine = SYSTEM_CONFIG.typewriter[lineIdx];
-      if (isDeleting) {
-        el.textContent = currentLine.substring(0, charIdx - 1);
+    let lineIdx = 0,
+        charIdx = 0,
+        deleting = false;
+    const tick = () => {
+      const line = CONFIG.typewriter[lineIdx];
+      if (deleting) {
         charIdx--;
+        el.textContent = line.substring(0, charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          lineIdx = (lineIdx + 1) % CONFIG.typewriter.length;
+        }
       } else {
-        el.textContent = currentLine.substring(0, charIdx + 1);
         charIdx++;
+        el.textContent = line.substring(0, charIdx);
+        if (charIdx === line.length) {
+          deleting = true;
+        }
       }
-
-      let typeSpeed = isDeleting ? 50 : 100;
-
-      if (!isDeleting && charIdx === currentLine.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        lineIdx = (lineIdx + 1) % SYSTEM_CONFIG.typewriter.length;
-        typeSpeed = 500;
-      }
-
-      setTimeout(type, typeSpeed);
+      setTimeout(tick, deleting ? 50 : 100);
     };
-
-    type();
+    tick();
   }
 
+  // -----------------------------------------------------------------
+  // Hero canvas – depth‑aware bokeh particles (80 particles, off‑screen buffer)
+  // -----------------------------------------------------------------
   initHeroCanvas() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let particles = [];
-
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
     };
-
     window.addEventListener('resize', resize);
     resize();
 
-    class BokehParticle {
-      constructor() {
-        this.reset();
-      }
+    class Particle {
+      constructor() { this.reset(); }
       reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.z = Math.random() * 1000; // Depth value
-        this.vx = (Math.random() - 0.5) * 0.2;
-        this.vy = (Math.random() - 0.5) * 0.2;
-        this.radius = Math.random() * 2 + 0.5;
+        this.x = Math.random() * canvas.width / (window.devicePixelRatio||1);
+        this.y = Math.random() * canvas.height / (window.devicePixelRatio||1);
+        this.z = Math.random() * 1000; // depth
+        const speed = (this.z / 1000) * 0.3 + 0.1;
+        const angle = Math.random() * Math.PI * 2;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.r = (1 - this.z/1000) * 2 + 0.5;
       }
-      update() {
+      update(cursor) {
         this.x += this.vx;
         this.y += this.vy;
-
+        // Bounce off edges
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-        // Parallax effect based on depth (z)
-        const dx = this.x - this.state.cursor.x;
-        const dy = this.y - this.state.cursor.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-
-        if (dist < 200) {
-          const influence = (1000 - this.z) / 1000; // Nearer particles move more
+        // Parallax influence when cursor is near
+        const dx = this.x - cursor.x;
+        const dy = this.y - cursor.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 150) {
+          const influence = (1000 - this.z) / 1000;
           const angle = Math.atan2(dy, dx);
-          this.x += Math.cos(angle) * influence * 0.3;
-          this.y += Math.sin(angle) * influence * 0.3;
+          this.x += Math.cos(angle) * influence * 0.2;
+          this.y += Math.sin(angle) * influence * 0.2;
         }
       }
-      draw() {
+      draw(ctx) {
         const scale = (1000 - this.z) / 1000;
-        const currentRadius = this.radius * scale * 2;
-        const opacity = scale * 0.6;
-
-        // Bokeh effect: blur further particles
-        const blur = (this.z / 100) * 1.5;
-        ctx.filter = `blur(${blur}px)`;
-
-        ctx.fillStyle = SYSTEM_CONFIG.colors.brand;
-        ctx.globalAlpha = opacity;
+        ctx.globalAlpha = scale * 0.6;
+        ctx.filter = `blur(${this.z / 200}px)`;
+        ctx.fillStyle = CONFIG.colors.brand;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, currentRadius, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI*2);
         ctx.fill();
-        ctx.filter = 'none'; // Reset filter for next particle
+        ctx.filter = 'none';
+        ctx.globalAlpha = 1;
       }
     }
 
-    particles = Array.from({ length: 80 }, () => new BokehParticle());
-
-    const animate = () => {
-      if (!this.canvasActive) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
+    const particles = Array.from({length: 80}, () => new Particle());
+    const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-
-      requestAnimationFrame(animate);
+      const cursor = {x: this.state.cursor.x, y: this.state.cursor.y};
+      particles.forEach(p => { p.update(cursor); p.draw(ctx); });
+      requestAnimationFrame(render);
     };
-
-    // IntersectionObserver to pause animation when not visible
-    const canvasObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.canvasActive = true;
-        } else {
-          this.canvasActive = false;
-        }
-      });
-    }, { threshold: 0.1 });
-
-    canvasObserver.observe(canvas);
-    this.canvasActive = true;
-    animate();
-  }
+    render();
   }
 
+  // -----------------------------------------------------------------
+  // IntersectionObserver – reveal on scroll (fallback via CSS animation)
+  // -----------------------------------------------------------------
   initRevealObserver() {
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.1 });
-
+    }, {threshold: 0.1});
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
   }
 
-  initMetrics() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const values = entry.target.querySelectorAll('.metric-value');
-          values.forEach(val => {
-            const target = parseInt(val.dataset.target);
-            this.animateValue(val, target);
-          });
-        }
-      });
-    }, { threshold: 0.5 });
+  // -----------------------------------------------------------------
+  // Projects – generate cards dynamically from CONFIG.projects
+  // -----------------------------------------------------------------
+  renderProjects() {
+    const container = document.querySelector('.projects-grid');
+    if (!container) return;
+    const fragment = document.createDocumentFragment();
+    CONFIG.projects.forEach(proj => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.dataset.reveal = '';
+      card.innerHTML = `
+        <img src="${proj.img}" alt="${proj.title}" class="project-img" loading="lazy" />
+        <div class="project-info">
+          <h3>${proj.title}</h3>
+          <div class="project-meta">
+            ${proj.tags.map(tag => `<span class="meta-tag">${tag}</span>`).join('')}
+          </div>
+          <p>${proj.detail}</p>
+          <div class="project-footer">
+            <a href="#" class="project-link" data-project="${proj.title}">Details ⟶</a>
+          </div>
+        </div>`;
+      fragment.appendChild(card);
+    });
+    container.appendChild(fragment);
+    // Re‑observe newly added cards for reveal animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, {threshold:0.1});
+    container.querySelectorAll('.project-card').forEach(c => observer.observe(c));
 
-    document.querySelectorAll('.bento-item').forEach(el => observer.observe(el));
-  }
-
-  animateValue(el, target) {
-    let current = 0;
-    const duration = 1500;
-    const step = target / (duration / 16);
-
-    const frame = () => {
-      current += step;
-      if (current < target) {
-        el.textContent = Math.ceil(current);
-        requestAnimationFrame(frame);
-      } else {
-        el.textContent = target;
-      }
-    };
-    frame();
-  }
-
-  initProjectModals() {
+    // Project detail modal handling
     const dialog = document.getElementById('project-dialog');
     const body = document.getElementById('dialog-body');
-    if (!dialog || !body) return;
-
-    document.querySelectorAll('.open-details').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const pid = btn.dataset.project;
-        const project = SYSTEM_CONFIG.projects[pid];
-        if (!project) return;
-
-        body.innerHTML = `
-          <h2 style="color:var(--brand); font-family:var(--font-mono); margin-bottom:1rem">${project.title}</h2>
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-            <div>
-              <h4 style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; margin-bottom:1rem">System Specs</h4>
-              <div style="display:flex; flex-direction:column; gap:0.5rem">
-                ${project.specs.map(s => `
-                  <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.9rem; border-bottom:1px solid var(--surface-border)">
-                    <span>${s.label}</span>
-                    <span style="color:var(--brand)">${s.value}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-            <div>
-              <h4 style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; margin-bottom:1rem">Tech Stack</h4>
-              <div style="display:flex; flex-wrap:wrap; gap:0.5rem">
-                ${project.tech.map(t => `<span class="tag">${t}</span>`).join('')}
-              </div>
-            </div>
+    if (!dialog) return;
+    container.addEventListener('click', e => {
+      const link = e.target.closest('.project-link');
+      if (!link) return;
+      e.preventDefault();
+      const title = link.dataset.project;
+      const proj = CONFIG.projects.find(p => p.title === title);
+      if (!proj) return;
+      body.innerHTML = `
+        <h2>${proj.title}</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0;">
+          <div>
+            <h4>Specs</h4>
+            ${proj.specs.map(s=>`<div style="display:flex; justify-content:space-between; margin:0.2rem 0;"><span>${s.label}</span><span>${s.value}</span></div>`).join('')}
           </div>
-          <p style="color:var(--text-muted); line-height:1.6">${project.detail}</p>
-        `;
-
-        dialog.showModal();
-      });
+          <div>
+            <h4>Tech Stack</h4>
+            ${proj.tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+          </div>
+        </div>
+        <p>${proj.detail}</p>
+      `;
+      dialog.showModal();
     });
-
-    const closeBtn = document.querySelector('.close-dialog');
+    const closeBtn = dialog.querySelector('.close-dialog');
     if (closeBtn) closeBtn.addEventListener('click', () => dialog.close());
   }
 
+  // -----------------------------------------------------------------
+  // Command palette – fuzzy search over static commands + project titles
+  // -----------------------------------------------------------------
   initCommandPalette() {
     const palette = document.getElementById('cmd-palette');
     const input = document.getElementById('cmd-input');
-    const suggestions = document.querySelectorAll('.suggestion-item');
-    if (!palette || !input) return;
+    const suggestions = palette.querySelector('.palette-suggestions');
+    const closeBtn = palette.querySelector('.palette-close');
 
-    const open = () => {
-      palette.showModal();
-      input.focus();
-    };
+    const commands = [
+      {cmd:'goto projects', label:'Navigate to Projects'},
+      {cmd:'goto expertise', label:'Navigate to Expertise'},
+      {cmd:'goto timeline', label:'Navigate to Timeline'},
+      {cmd:'goto contact', label:'Navigate to Contact'},
+      {cmd:'clear', label:'Clear console (demo)'}
+    ];
 
-    const close = () => {
-      palette.close();
-      input.value = '';
-    };
-
-    this.togglePalette = () => {
-      if (this.state.isPaletteOpen) close();
-      else open();
-      this.state.isPaletteOpen = !this.state.isPaletteOpen;
-    };
-
-    const closeBtn = document.querySelector('.palette-close');
-    if (closeBtn) closeBtn.addEventListener('click', close);
-
-    input.addEventListener('keydown', (e) => {
+    const open = () => { palette.showModal(); input.focus(); this.state.isPaletteOpen = true; renderList(commands.map(c=>c.cmd)); };
+    const close = () => { palette.close(); input.value=''; suggestions.innerHTML=''; this.state.isPaletteOpen = false; };
+    this.togglePalette = () => { if (this.state.isPaletteOpen) close(); else open(); };
+    closeBtn.addEventListener('click', close);
+    input.addEventListener('keydown', e => {
       if (e.key === 'Escape') close();
       if (e.key === 'Enter') {
-        const cmd = input.value.toLowerCase().trim();
-        this.executeCommand(cmd);
+        const val = input.value.trim();
+        this.executeCommand(val);
+        close();
       }
     });
-
-    suggestions.forEach(item => {
-      item.addEventListener('click', () => {
-        this.executeCommand(item.dataset.cmd);
-      });
+    input.addEventListener('input', e => {
+      const val = e.target.value.trim();
+      if (!val) { renderList(commands.map(c=>c.cmd)); return; }
+      const filtered = sortFuzzy(commands.map(c=>c.cmd), val);
+      renderList(filtered);
     });
-
-    input.addEventListener('input', () => {
-      const val = input.value.toLowerCase();
-      suggestions.forEach(s => {
-        s.style.display = s.dataset.cmd.includes(val) ? 'flex' : 'none';
+    const renderList = list => {
+      suggestions.innerHTML = list.map(item => `<li role="option" data-cmd="${item}">${item}</li>`).join('');
+      suggestions.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', () => { this.executeCommand(li.dataset.cmd); close(); });
       });
-    });
+    };
   }
 
   executeCommand(cmd) {
-    const commands = {
-      'goto projects': () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }),
-      'goto expertise': () => document.getElementById('expertise')?.scrollIntoView({ behavior: 'smooth' }),
-      'goto contact': () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
-      'clear': () => alert('Console cleared. System status: NOMINAL'),
-      'help': () => alert('Available commands: goto projects, goto expertise, goto contact, clear, help')
+    const map = {
+      'goto projects': () => document.getElementById('projects').scrollIntoView({behavior:'smooth'}),
+      'goto expertise': () => document.getElementById('expertise').scrollIntoView({behavior:'smooth'}),
+      'goto timeline': () => document.getElementById('timeline').scrollIntoView({behavior:'smooth'}),
+      'goto contact': () => document.getElementById('contact').scrollIntoView({behavior:'smooth'}),
+      'clear': () => console.clear()
     };
+    const fn = map[cmd.toLowerCase()];
+    if (fn) fn();
+  }
 
-    if (commands[cmd]) {
-      commands[cmd]();
-      this.state.isPaletteOpen = false;
-      document.getElementById('cmd-palette')?.close();
-    } else {
-      alert(`Command not found: ${cmd}. Type 'help' for list.`);
-    }
+  // -----------------------------------------------------------------
+  // Timeline – add CSS class via IntersectionObserver (already covered)
+  // -----------------------------------------------------------------
+  initTimeline() {
+    // No extra JS needed – CSS handles [data-reveal] transition.
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// -------------------------------------------------------------------
+// Boot the engine when DOM is ready
+// -------------------------------------------------------------------
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new CoreEngine());
+} else {
   new CoreEngine();
-});
+}
