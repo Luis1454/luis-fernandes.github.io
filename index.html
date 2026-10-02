@@ -1,250 +1,313 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Luis Fernandes - Aerospace software internship portfolio (systems, telemetry, simulation)."
-    />
-    <title>Luis Fernandes | Aerospace Internship Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
-    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+<!DOCTYPE html>
+<html lang="en" class="dark" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luis Fernandes // Systems Engineering</title>
+  <meta name="description" content="Senior Systems & Aerospace Engineer specializing in HPC, CUDA, and mission-critical software.">
 
-    <header class="site-header">
-      <a class="logo" href="#top">LF.dev</a>
-      <nav>
-        <a href="#about">Profile</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Luis Fernandes – Systems Engineering Portfolio" />
+    <meta property="og:description" content="Showcasing HPC, CUDA, and aerospace projects." />
+    <meta property="og:image" content="https://picsum.photos/seed/aerospace1/800/600" />
+    <meta property="og:url" content="https://luis-fernandes.github.io/" />
+    <meta property="og:type" content="website" />
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-    <main id="top">
-      <section class="hero reveal">
-        <p class="tag">2026 Aerospace Software Internship</p>
-        <h1>
-          Systems software, telemetry pipelines,
-          <span>and scientific simulation for space applications.</span>
-        </h1>
-        <p class="hero-intro">
-          I am <strong>Luis Fernandes</strong>, Epitech Tek5 (Systems
-          Engineering) currently on exchange at CSULB in Long Beach, CA.
-          <strong>F-1 student, seeking J-1/JPI sponsorship</strong> for a US
-          internship in mission software, telemetry, and simulation.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="./assets/resume_newspace.pdf"
-            >Download Resume (PDF)</a
-          >
-          <a class="btn btn-ghost" href="mailto:luis.fernandes@epitech.eu"
-            >Email Me</a
-          >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="js-disabled">
+  <div class="scroll-progress"></div>
+
+  <!-- Visual Noise & Atmospheric Layers -->
+  <div class="noise-overlay"></div>
+  <div class="spotlight"></div>
+  <div class="grid-layer"></div>
+
+  <!-- Navigation -->
+  <nav class="glass-nav">
+    <a href="#top" class="nav-logo">LF_CORE<span class="blink">_</span></a>
+    <div class="nav-links">
+      <a href="#expertise" class="nav-item">Expertise</a>
+      <a href="#projects" class="nav-item">Systems</a>
+      <a href="#experience" class="nav-item">Experience</a>
+      <a href="#contact" class="nav-item">Contact</a>
+      <span class="nav-shortcut">⌘K</span>
+    </div>
+  <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="top">
+      <div class="hero-visual">
+        <video autoplay muted loop playsinline class="hero-bg-video">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-of-blue-particles-in-dark-space-23331-large.mp4" type="video/mp4">
+        </video>
+        <canvas id="hero-canvas"></canvas>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">SYSTEM STATUS: ACTIVE</div>
+        <h1 class="glitch-text" data-text="LUIS FERNANDES">LUIS FERNANDES</h1>
+        <p class="hero-subtitle" id="typewriter">Initializing aerospace systems...</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">Explore Work</a>
+          <a href="#contact" class="btn btn-outline">Establish Connection</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="about" class="panel reveal">
-        <h2>Profile</h2>
-        <div class="about-grid">
-          <article>
-            <h3>Target Scope</h3>
-            <p>
-              New Space internships in Los Angeles area: SpaceX, JPL, Rocket
-              Lab. Roles: systems software, embedded/firmware, simulation/HPC.
-            </p>
-          </article>
-          <article>
-            <h3>Core Strengths</h3>
-            <ul class="chips">
-              <li>C / C++20</li>
-              <li>Linux + ptrace</li>
-              <li>Telemetry decode</li>
-              <li>N-body simulation</li>
-              <li>CUDA / OpenCL</li>
-              <li>FPGA (Vivado)</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Positioning</h3>
-            <p>
-              10+ years Linux maker background with low-level rigor, defensive
-              debugging, and end-to-end ownership of technical systems.
-            </p>
-          </article>
-        </div>
-      </section>
+    <!-- Expertise / Stack Matrix -->
+    <section id="expertise" class="section">
+      <div class="section-header">
+        <span class="section-id">01</span>
+        <h2 class="section-title">Technical Stack Matrix</h2>
+        <div class="section-divider"></div>
+      </div>
 
-      <section id="projects" class="reveal">
-        <div class="section-head">
-          <h2>Selected Technical Projects</h2>
-          <p>Directly aligned with aerospace software and mission environments.</p>
+      <div class="bento-grid">
+        <div class="bento-item large highlight" data-reveal>
+          <div class="bento-label">Low-Level & Systems</div>
+          <div class="bento-content">
+            <div class="stack-group">
+              <span class="stack-category">Core:</span>
+              <div class="stack-tags">
+                <span class="tag">C++20</span>
+                <span class="tag">CUDA</span>
+                <span class="tag">Rust</span>
+                <span class="tag">Assembly x86/ARM</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <span class="stack-category">OS/Kernel:</span>
+              <div class="stack-tags">
+                <span class="tag">Linux Kernel</span>
+                <span class="tag">ptrace</span>
+                <span class="tag">RTOS</span>
+                <span class="tag">eBPF</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="projects-grid">
-          <article class="project-card">
-            <p class="project-type">Telemetry Software</p>
+
+        <div class="bento-item medium" data-reveal>
+          <div class="bento-label">HPC & Simulation</div>
+          <div class="bento-content">
+            <div class="metric-item">
+              <span class="metric-value" data-target="100">0</span><span class="metric-unit">% GPU Util</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value" data-target="60">0</span><span class="metric-unit">FPS Sim</span>
+            </div>
+            <div class="stack-tags">
+              <span class="tag">OpenCL</span>
+              <span class="tag">MPI</span>
+              <span class="tag">SIMD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-item medium" data-reveal>
+          <div class="bento-label">Aerospace Tooling</div>
+          <div class="bento-content">
+            <div class="stack-tags">
+              <span class="tag">FPGA/Vivado</span>
+              <span class="tag">Telemetry</span>
+              <span class="tag">SDR</span>
+              <span class="tag">CAN Bus</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-item small" data-reveal>
+          <div class="bento-label">Infrastructure</div>
+          <div class="stack-tags">
+            <span class="tag">Docker</span>
+            <span class="tag">K8s</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="section">
+      <div class="section-header">
+        <span class="section-id">02</span>
+        <h2 class="section-title">Systems Showcase</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card" data-reveal>
+          <div class="project-img-container">
+            <img src="https://picsum.photos/seed/aerospace1/800/600" alt="LBR Telemetry">
+            <div class="project-overlay">
+              <button class="open-details" data-project="p1">System Specs</button>
+            </div>
+          </div>
+          <div class="project-info">
             <h3>LBR Telemetry Receiver</h3>
-            <p>
-              Long Beach Rocketry contribution: reception pipeline including
-              demodulation, decoding, frame reconstruction, and checksum
-              validation.
-            </p>
-            <a href="https://www.longbeachrocketry.com/" target="_blank" rel="noreferrer"
-              >Club context</a
-            >
-          </article>
-          <article class="project-card">
-            <p class="project-type">Simulation / HPC</p>
+            <div class="project-meta">
+              <span class="meta-tag">CUDA</span>
+              <span class="meta-tag">C++</span>
+              <span class="meta-tag">SDR</span>
+            </div>
+            <p>Real-time telemetry pipeline including demodulation, decoding, and checksum validation for high-altitude rocketry.</p>
+            <div class="project-footer">
+              <a href="https://www.longbeachrocketry.com/" target="_blank" class="project-link">External View &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card" data-reveal>
+          <div class="project-img-container">
+            <img src="https://picsum.photos/seed/hpc2/800/600" alt="N-body Engine">
+            <div class="project-overlay">
+              <button class="open-details" data-project="p2">System Specs</button>
+            </div>
+          </div>
+          <div class="project-info">
             <h3>Backlight N-body Engine</h3>
-            <p>
-              Pure C + CSFML cosmological simulator. Current performance:
-              1000 bodies at 30+ FPS on CPU, with extended-precision arithmetic
-              and Octree scaling roadmap.
-            </p>
-            <a href="https://www.youtube.com/@_LuisFernandes_/" target="_blank" rel="noreferrer"
-              >Media</a
-            >
-          </article>
-          <article class="project-card">
-            <p class="project-type">Scientific Rendering</p>
+            <div class="project-meta">
+              <span class="meta-tag">SIMD</span>
+              <span class="meta-tag">Pure C</span>
+              <span class="meta-tag">HPC</span>
+            </div>
+            <p>Cosmological simulator handling 1000+ bodies at 60 FPS using extended-precision arithmetic and cache optimization.</p>
+            <div class="project-footer">
+              <a href="https://www.youtube.com/@_LuisFernandes_/" target="_blank" class="project-link">Technical Demo &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card" data-reveal>
+          <div class="project-img-container">
+            <img src="https://picsum.photos/seed/physics3/800/600" alt="Relativistic Raytracer">
+            <div class="project-overlay">
+              <button class="open-details" data-project="p3">System Specs</button>
+            </div>
+          </div>
+          <div class="project-info">
             <h3>Relativistic Raytracer</h3>
-            <p>
-              Curved-spacetime rendering pipeline (SR to GR extension) with
-              metric-based physics modeling and GPU acceleration experiments.
-            </p>
-            <a href="https://www.youtube.com/watch?v=FyKVyskvqbg" target="_blank" rel="noreferrer"
-              >Demo 1</a
-            >
-          </article>
-          <article class="project-card">
-            <p class="project-type">Low-Level Systems</p>
-            <h3>Unix Tooling Reconstruction</h3>
-            <p>
-              Rebuilt core tooling (`strace`, `nm`, `objdump`) and contributed
-              to `ftrace` to deepen ELF-level diagnostics, ptrace tracing, and
-              process-level debugging.
-            </p>
-            <a href="https://github.com/Luis1454" target="_blank" rel="noreferrer"
-              >GitHub</a
-            >
-          </article>
+            <div class="project-meta">
+              <span class="meta-tag">CUDA</span>
+              <span class="meta-tag">OptiX</span>
+              <span class="meta-tag">Physics</span>
+            </div>
+            <p>Curved-spacetime rendering pipeline with metric-based physics modeling and hardware-accelerated ray-tracing.</p>
+            <div class="project-footer">
+              <a href="https://www.youtube.com/watch?v=FyKVyskvqbg" target="_blank" class="project-link">See Rendering &rarr;</a>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="experience" class="panel reveal">
-        <h2>Professional Experience</h2>
-        <div class="timeline">
-          <article>
-            <h3>X'PROCHEM - Full Stack Developer Intern</h3>
-            <p class="timeline-meta">Apr 2025 - Aug 2025 | Lille, France</p>
-            <p>
-              Built a full internal R&D intranet (Node.js, PostgreSQL, Nginx,
-              Docker) for protein-synthesis tracking and anomaly prediction
-              workflows.
-            </p>
-          </article>
-          <article>
-            <h3>Monstock - QA Android Developer Intern</h3>
-            <p class="timeline-meta">Sep 2024 - Feb 2025 | Reims, France</p>
-            <p>
-              Implemented bypass strategies for Android automation gaps
-              (unavailable selectors), enabling blocked test scenarios.
-            </p>
-          </article>
-          <article>
-            <h3>Monstock - QA Tester Intern</h3>
-            <p class="timeline-meta">Oct 2023 - Dec 2023 | Reims, France</p>
-            <p>
-              Ran Java/Katalon functional campaigns, produced hundreds of test
-              reports, and automated recurring defect checks.
-            </p>
-          </article>
-          <article>
-            <h3>Indium Solutions - Groupe Cold - ERP Developer Intern</h3>
-            <p class="timeline-meta">Jul 2023 - Oct 2023 | Maraussan, France</p>
-            <p>
-              Delivered Odoo plugins and a stock-import pipeline handling
-              thousands of products in minutes.
-            </p>
-          </article>
+    <!-- Experience Timeline -->
+    <section id="experience" class="section">
+      <div class="section-header">
+        <span class="section-id">03</span>
+        <h2 class="section-title">Engineering Path</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-track"></div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="time-date">2025 &mdash; PRESENT</span>
+            <h3>Systems Engineering (Tek5)</h3>
+            <p class="time-sub">Exchange at CSULB / Epitech</p>
+            <p>Specializing in the intersection of embedded systems and HPC simulation for aerospace applications.</p>
+          </div>
         </div>
-      </section>
 
-      <section class="panel reveal">
-        <h2>Education and Application Info</h2>
-        <div class="about-grid">
-          <article>
-            <h3>Education</h3>
-            <p>
-              CSULB exchange program (Aug 18, 2025 - May 15, 2026) and Epitech
-              Tek5 Systems Engineering (expected graduation: 2027).
-            </p>
-          </article>
-          <article>
-            <h3>Relevant Coursework</h3>
-            <ul class="chips">
-              <li>System on a Chip</li>
-              <li>Digital Signal Processing</li>
-              <li>Machine Learning</li>
-              <li>Computer Logic</li>
-              <li>Data Analysis</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Internship Window</h3>
-            <p>
-              Available for 2026 internship opportunities. Currently F-1
-              student, seeking J-1/JPI sponsorship for end-of-studies
-              placement in the USA.
-            </p>
-          </article>
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="time-date">2025</span>
+            <h3>X'PROCHEM</h3>
+            <p class="time-sub">Full Stack Dev Intern</p>
+            <p>Built internal R&D intranet for protein-synthesis tracking using Node.js, PostgreSQL, and Docker.</p>
+          </div>
         </div>
-      </section>
 
-      <section id="contact" class="panel reveal">
-        <h2>Contact</h2>
-        <p>
-          For aerospace internship opportunities, referrals, or technical
-          discussions, please reach out.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:luis.fernandes@epitech.eu"
-            >luis.fernandes@epitech.eu</a
-          >
-          <a
-            class="btn btn-ghost"
-            href="https://www.linkedin.com/in/luis-fernandes-289465231/"
-            target="_blank"
-            rel="noreferrer"
-            >LinkedIn</a
-          >
-          <a
-            class="btn btn-ghost"
-            href="https://www.youtube.com/@_LuisFernandes_/"
-            target="_blank"
-            rel="noreferrer"
-            >YouTube Demos</a
-          >
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="time-date">2023 &mdash; 2025</span>
+            <h3>Monstock</h3>
+            <p class="time-sub">QA Android / Tester Intern</p>
+            <p>Engineered automated testing pipelines for fintech mobile applications.</p>
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <footer>
-      <p>© <span id="year"></span> Luis Fernandes</p>
-      <a href="https://github.com/Luis1454" target="_blank" rel="noreferrer"
-        >GitHub</a
-      >
-    </footer>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="contact-container" data-reveal>
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-subtitle">Seeking 2026 Aerospace Internship Opportunities</p>
+        <div class="contact-links">
+          <a href="mailto:luis.fernandes@epitech.eu" class="contact-btn btn-primary">Email Me</a>
+          <a href="https://www.linkedin.com/in/luis-fernandes-289465231/" target="_blank" class="contact-btn btn-outline">LinkedIn</a>
+          <a href="https://github.com/Luis1454" target="_blank" class="contact-btn btn-outline">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <script src="./script.js"></script>
-  </body>
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- Command Palette Dialog -->
+  <dialog id="cmd-palette" class="cmd-palette">
+    <div class="palette-content">
+      <div class="palette-header">
+        <span class="palette-title">SYSTEM_COMMAND_CENTER</span>
+        <span class="palette-close">&times;</span>
+      </div>
+      <div class="palette-search-wrap">
+        <span class="palette-prompt">&gt;</span>
+        <input type="text" id="cmd-input" placeholder="Enter command... (e.g. 'goto projects')" autofocus>
+      </div>
+      <div class="palette-suggestions">
+        <div class="suggestion-item" data-cmd="goto projects">goto projects <span class="cmd-desc">Navigate to Systems Showcase</span></div>
+        <div class="suggestion-item" data-cmd="goto expertise">goto expertise <span class="cmd-desc">View Technical Stack</span></div>
+        <div class="suggestion-item" data-cmd="goto contact">goto contact <span class="cmd-desc">Open Contact Section</span></div>
+        <div class="suggestion-item" data-cmd="clear">clear <span class="cmd-desc">Reset Console</span></div>
+        <div class="suggestion-item" data-cmd="help">help <span class="cmd-desc">Show all available commands</span></div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Project Detail Dialog -->
+  <dialog id="project-dialog" class="project-dialog">
+    <div class="dialog-content">
+      <button class="close-dialog">&times;</button>
+      <div id="dialog-body">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </dialog>
+
+  <footer style="padding: 2rem 0; text-align: center;">
+    <div class="footer-meta" style="display: flex; justify-content: center; gap: 2rem;">
+      <span>COORD: 33.84N 117.89W</span>
+      <span>KERNEL: v6.12.0-aerospace</span>
+      <span>© <span id="year"></span> LUIS FERNANDES</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
 </html>

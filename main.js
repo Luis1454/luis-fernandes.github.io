@@ -106,6 +106,40 @@ class CoreEngine {
         this.togglePalette();
       }
     });
+
+    // Scroll progress bar and back-to-top button
+    const scrollHandler = () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const percent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      document.documentElement.style.setProperty('--scroll-percent', `${percent}%`);
+      const backBtn = document.querySelector('.back-to-top');
+      if (backBtn) {
+        backBtn.style.opacity = scrollY > 300 ? '1' : '0';
+        backBtn.style.pointerEvents = scrollY > 300 ? 'auto' : 'none';
+      }
+    };
+    window.addEventListener('scroll', scrollHandler);
+
+    // Theme toggle button
+    const themeBtn = document.querySelector('.theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-theme');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', newTheme);
+        themeBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+      });
+    }
+
+    // Back-to-top button click
+    const backBtn = document.querySelector('.back-to-top');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   }
 
   updateSpotlight() {

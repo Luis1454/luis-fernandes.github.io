@@ -60,7 +60,6 @@ function initHUD() {
 
 function initCursor() {
   const cursor = document.getElementById("custom-cursor");
-  if (!cursor) return;
   const dot = cursor.querySelector(".cursor-dot");
   const outline = cursor.querySelector(".cursor-outline");
   const text = cursor.querySelector(".cursor-text");
@@ -82,15 +81,13 @@ function initCursor() {
     el.addEventListener("mouseenter", () => {
       gsap.to(outline, { scale: 2, backgroundColor: "rgba(0, 242, 255, 0.1)", duration: 0.3 });
       gsap.to(dot, { scale: 0.5, duration: 0.3 });
-      if (text) {
-        text.style.opacity = "1";
-        text.textContent = "VIEW";
-      }
+      text.style.opacity = "1";
+      text.textContent = "VIEW";
     });
     el.addEventListener("mouseleave", () => {
       gsap.to(outline, { scale: 1, backgroundColor: "transparent", duration: 0.3 });
       gsap.to(dot, { scale: 1, duration: 0.3 });
-      if (text) text.style.opacity = "0";
+      text.style.opacity = "0";
     });
   });
 }
@@ -109,14 +106,14 @@ function initSpotlight() {
 function initGSAPAnimations() {
   gsap.registerPlugin(ScrollTrigger);
 
-  // 1. High-End Hero Entry - STRICT INITIAL STATE
-  gsap.set(".hero h1", { opacity: 0, y: 100, rotateX: -45, visibility: 'hidden' });
-  gsap.set(".hero p, .cta-group", { opacity: 0, y: 30, visibility: 'hidden' });
+  // 1. High-End Hero Entry
+  gsap.set(".hero h1", { opacity: 0, y: 100, rotateX: -45 });
+  gsap.set(".hero p, .cta-group", { opacity: 0, y: 30 });
 
   const tlHero = gsap.timeline({
     delay: 1.5,
     onStart: () => {
-      gsap.set(".hero h1, .hero p, .cta-group", { visibility: 'visible' });
+      // Optional: trigger a sound effect or specialized loader end here
     }
   });
 
@@ -140,19 +137,19 @@ function initGSAPAnimations() {
     ease: "power4.out"
   }, "-=0.8");
 
-  // 2. Bento "Explosion" Reveal - Adjusted for stability
+  // 2. Bento "Explosion" Reveal
   gsap.from(".profile-card", {
     scrollTrigger: {
       trigger: "#about",
-      start: "top 85%",
+      start: "top 80%",
       end: "bottom 20%",
       scrub: 1,
     },
-    x: (i) => (i % 2 === 0 ? -50 : 50), // Reduced from 100 to prevent overflow
-    y: 50,
+    x: (i) => (i % 2 === 0 ? -100 : 100),
+    y: 100,
     opacity: 0,
-    rotate: (i) => (i % 2 === 0 ? -5 : 5),
-    scale: 0.9,
+    rotate: (i) => (i % 2 === 0 ? -10 : 10),
+    scale: 0.8,
     duration: 1,
     ease: "power2.out"
   });
@@ -161,16 +158,17 @@ function initGSAPAnimations() {
   gsap.from(".exp-item", {
     scrollTrigger: {
       trigger: "#experience",
-      start: "top 85%",
+      start: "top 80%",
     },
     opacity: 0,
-    x: -30,
+    x: -50,
     stagger: 0.15,
     duration: 1,
     ease: "expo.out"
   });
 
   // 4. Project "Stacking" Effect
+  // We simulate a stacking effect by creating a sticky-like feel with GSAP
   const projects = document.querySelectorAll(".project-card");
   projects.forEach((card, i) => {
     gsap.from(card, {
@@ -180,9 +178,9 @@ function initGSAPAnimations() {
         end: "top 20%",
         scrub: true,
       },
-      scale: 0.9,
+      scale: 0.8 + (i * 0.02), // Subtle scale difference
       opacity: 0,
-      y: 50,
+      y: 100,
       ease: "power1.inOut"
     });
   });
