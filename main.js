@@ -258,7 +258,7 @@ class CoreEngine {
       }
     }
 
-    const particles = Array.from({length: 80}, () => new Particle());
+    const particles = Array.from({length: 40}, () => new Particle());
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cursor = {x: this.state.cursor.x, y: this.state.cursor.y};
@@ -284,6 +284,18 @@ class CoreEngine {
   // Projects – generate cards dynamically from CONFIG.projects
   // -----------------------------------------------------------------
   renderProjects() {
+    const schedule = () => {
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => {
+          this._renderProjectsNow();
+        });
+      } else {
+        this._renderProjectsNow();
+      }
+    };
+    schedule();
+  }
+  _renderProjectsNow() {
     const container = document.querySelector('.projects-grid');
     if (!container) return;
     const fragment = document.createDocumentFragment();
@@ -306,13 +318,12 @@ class CoreEngine {
       fragment.appendChild(card);
     });
     container.appendChild(fragment);
-    // Re‑observe newly added cards for reveal animation
+    // Observe for reveal animation
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, {threshold:0.1});
     container.querySelectorAll('.project-card').forEach(c => observer.observe(c));
-
-    // Project detail modal handling
+    // Modal handling
     const dialog = document.getElementById('project-dialog');
     const body = document.getElementById('dialog-body');
     if (!dialog) return;
