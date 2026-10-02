@@ -1,179 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="fr" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luis Fernandes – High‑Performance Systems Engineer</title>
-  <meta name="description" content="Senior systems engineer specializing in HPC, low‑level architecture, CUDA, and aerospace software." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luis Fernandes – TUI Portfolio</title>
+  <meta name="description"
+        content="Senior systems engineer specialized in HPC, low‑level, aerospace software – presented as an interactive terminal UI.">
+  <!-- Open‑Graph / SEO -->
+  <meta property="og:title" content="Luis Fernandes – TUI Portfolio">
+  <meta property="og:description" content="Interactive terminal‑style showcase of high‑performance engineering work.">
+  <meta property="og:image" content="https://picsum.photos/seed/tui/1200/630">
+  <meta property="og:url" content="https://luis-fernandes.github.io/">
+  <meta property="og:type" content="website">
 
-  <!-- Open Graph / SEO -->
-  <meta property="og:title" content="Luis Fernandes – Systems Engineering Portfolio" />
-  <meta property="og:description" content="Showcasing high‑performance computing, aerospace telemetry, and low‑level system design projects." />
-  <meta property="og:image" content="https://picsum.photos/seed/aerospace1/1200/630" />
-  <meta property="og:url" content="https://luis-fernandes.github.io/" />
-  <meta property="og:type" content="website" />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- JSON‑LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Luis Fernandes",
-    "url": "https://luis-fernandes.github.io/",
-    "sameAs": [
-      "https://github.com/Luis1454",
-      "https://www.linkedin.com/in/luis-fernandes-289465231/"
-    ],
-    "jobTitle": "Senior Systems Engineer",
-    "description": "Specialist in high‑performance computing, low‑level system architecture, and aerospace telemetry software."
-  }
-  </script>
+  <!-- Font‑stack (pre‑loaded, display‑swap) -->
+  <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+                rel="stylesheet"></noscript>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="js-disabled" aria-live="polite">
-  <!-- Scroll progress bar -->
-  <div class="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Noise overlay (subtle static) -->
-  <div class="noise-overlay" aria-hidden="true"></div>
-
-  <!-- Navigation (ARIA role) -->
-  <nav class="glass-nav" role="navigation" aria-label="Main navigation">
-    <a href="#top" class="nav-logo" aria-label="Home">LF_CORE<span class="blink" aria-hidden="true">_</span></a>
-    <div class="nav-links">
-      <a href="#expertise" class="nav-item">Expertise</a>
-      <a href="#projects" class="nav-item">Projects</a>
-      <a href="#timeline" class="nav-item">Timeline</a>
-      <a href="#contact" class="nav-item">Contact</a>
-    </div>
-    <span class="nav-shortcut" aria-hidden="true">⌘K</span>
-  </nav>
-
-  <main>
-    <!-- Hero / Telemetry matrix -->
-    <section class="hero" id="top" aria-label="Hero telemetry">
-      <div class="hero-visual" role="img" aria-label="Animated background">
-        <canvas id="hero-canvas" width="0" height="0" aria-hidden="true"></canvas>
-      </div>
-      <div class="hero-content">
-        <h1 class="glitch-text" data-text="LUIS FERNANDES">LUIS FERNANDES</h1>
-        <p class="hero-subtitle" id="typewriter" aria-live="polite"></p>
-        <div class="hero-ctas">
-          <a href="#projects" class="btn btn-primary" role="button">Explore Projects</a>
-          <a href="#contact" class="btn btn-outline" role="button">Get in Touch</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Expertise / Bento Grid -->
-    <section id="expertise" class="section" aria-labelledby="expertise-heading">
-      <h2 id="expertise-heading" class="section-title">Core Competencies</h2>
-      <div class="bento-grid">
-        <div class="bento-item" data-reveal>
-          <h3 class="bento-label">Low‑Level Architecture</h3>
-          <ul class="stack-tags">
-            <li class="tag">C++20</li>
-            <li class="tag">Rust</li>
-            <li class="tag">Assembly</li>
-            <li class="tag">Memory Management</li>
-            <li class="tag">Parallelism</li>
-          </ul>
-        </div>
-        <div class="bento-item" data-reveal>
-          <h3 class="bento-label">GPU & Acceleration</h3>
-          <ul class="stack-tags">
-            <li class="tag">CUDA</li>
-            <li class="tag">OpenCL</li>
-            <li class="tag">AVX2 / SIMD</li>
-            <li class="tag">Ray‑Tracing</li>
-            <li class="tag">OptiX</li>
-          </ul>
-        </div>
-        <div class="bento-item" data-reveal>
-          <h3 class="bento-label">Infrastructure & DevOps</h3>
-          <ul class="stack-tags">
-            <li class="tag">Linux Kernel</li>
-            <li class="tag">Docker</li>
-            <li class="tag">Kubernetes</li>
-            <li class="tag">CI/CD</li>
-            <li class="tag">GitOps</li>
-          </ul>
-        </div>
-        <div class="bento-item" data-reveal>
-          <h3 class="bento-label">Aerospace Telemetry</h3>
-          <ul class="stack-tags">
-            <li class="tag">SDR</li>
-            <li class="tag">UDP/IP</li>
-            <li class="tag">Real‑time DSP</li>
-            <li class="tag">Embedded C</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects showcase -->
-    <section id="projects" class="section" aria-labelledby="projects-heading">
-      <h2 id="projects-heading" class="section-title">Selected Projects</h2>
-      <div class="projects-grid">
-        <!-- Project cards are generated dynamically via JS for consistency -->
-      </div>
-    </section>
-
-    <!-- Timeline -->
-    <section id="timeline" class="section" aria-labelledby="timeline-heading">
-      <h2 id="timeline-heading" class="section-title">Career Timeline</h2>
-      <div class="timeline">
-        <div class="timeline-track" aria-hidden="true"></div>
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <span class="time-date">2025‑Present</span>
-            <h3>Systems Engineer – Tek5</h3>
-            <p>Design and implement high‑throughput telemetry pipelines for aerospace applications.</p>
-          </div>
-        </div>
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <span class="time-date">2023‑2025</span>
-            <h3>Research Engineer – Monstock</h3>
-            <p>Built a SIMD‑optimized N‑body engine delivering 60 FPS at 1000+ bodies.</p>
-          </div>
-        </div>
-        <!-- Add further items as needed -->
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section" aria-labelledby="contact-heading">
-      <h2 id="contact-heading" class="section-title">Contact</h2>
-      <p>Open to senior‑level aerospace and HPC roles (2026). Reach me via the channels below.</p>
-      <div class="contact-links">
-        <a href="mailto:luis.fernandes@epitech.eu" class="btn btn-primary" role="button">Email</a>
-        <a href="https://www.linkedin.com/in/luis-fernandes-289465231/" target="_blank" rel="noopener" class="btn btn-outline" role="button">LinkedIn</a>
-        <a href="https://github.com/Luis1454" target="_blank" rel="noopener" class="btn btn-outline" role="button">GitHub</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Back‑to‑top button -->
-  <button class="back-to-top" aria-label="Back to top">↑</button>
-
-  <!-- Command Palette (Dialog) -->
-  <dialog id="cmd-palette" class="cmd-palette" aria-modal="true" aria-label="Command palette">
-    <div class="palette-content">
-      <div class="palette-header">
-        <span class="palette-title">COMMAND CENTER</span>
-        <button class="palette-close" aria-label="Close">&times;</button>
-      </div>
-      <div class="palette-search-wrap">
-        <span class="palette-prompt">&gt;</span>
-        <input type="text" id="cmd-input" placeholder="Type a command…" autocomplete="off" />
-      </div>
-      <ul class="palette-suggestions" role="listbox"></ul>
-    </div>
-  </dialog>
+  <!-- Full‑screen terminal container -->
+  <div id="terminal" role="region" aria-label="Interactive terminal UI"></div>
 
   <script src="main.js" defer></script>
 </body>
