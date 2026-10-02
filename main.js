@@ -128,11 +128,20 @@ class CoreEngine {
   // Global event handling – passive wherever possible
   // -----------------------------------------------------------------
   setupEventListeners() {
-    // Mouse move – cursor tracking for radial gradient spotlight
+    // Mouse move – cursor tracking for radial gradient spotlight (throttled via RAF)
+    let lastX = 0, lastY = 0, rafPending = false;
     window.addEventListener('mousemove', e => {
-      this.state.cursor.x = e.clientX;
-      this.state.cursor.y = e.clientY;
-      this.updateSpotlight();
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(() => {
+          this.state.cursor.x = lastX;
+          this.state.cursor.y = lastY;
+          this.updateSpotlight();
+          rafPending = false;
+        });
+      }
     }, {passive:true});
 
     // Scroll – progress bar & back‑to‑top visibility (throttled)
@@ -204,6 +213,11 @@ class CoreEngine {
   // Hero canvas – depth‑aware bokeh particles (80 particles, off‑screen buffer)
   // -----------------------------------------------------------------
   initHeroCanvas() {
+    // Skip heavy canvas on reduced‑motion or low‑power devices
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 2)) {
+      // Simple CSS fallback already defined in .hero-visual
+      return;
+    }
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -213,55 +227,55 @@ class CoreEngine {
       canvas.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
     };
-    window.addEventListener('resize', resize);
+    // Debounce resize to avoid layout thrash
+    const debouncedResize = debounce(resize, 100);
+    window.addEventListener('resize', debouncedResize);
     resize();
 
     class Particle {
       constructor() { this.reset(); }
       reset() {
-        this.x = Math.random() * canvas.width / (window.devicePixelRatio||1);
-        this.y = Math.random() * canvas.height / (window.devicePixelRatio||1);
-        this.z = Math.random() * 1000; // depth
-        const speed = (this.z / 1000) * 0.3 + 0.1;
+        this.x = Math.random() * canvas.width / (window.devicePixelRatio || 1);
+        this.y = Math.random() * canvas.height / (window.devicePixelRatio || 1);
+        this.z = Math.random() * 1000;
+        const speed = (this.z / 1000) * 0.2 + 0.05; // slower, fewer particles
         const angle = Math.random() * Math.PI * 2;
         this.vx = Math.cos(angle) * speed;
         this.vy = Math.sin(angle) * speed;
-        this.r = (1 - this.z/1000) * 2 + 0.5;
+        this.r = (1 - this.z / 1000) * 1.5 + 0.3;
       }
       update(cursor) {
         this.x += this.vx;
         this.y += this.vy;
-        // Bounce off edges
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        // Parallax influence when cursor is near
         const dx = this.x - cursor.x;
         const dy = this.y - cursor.y;
         const dist = Math.hypot(dx, dy);
-        if (dist < 150) {
+        if (dist < 120) {
           const influence = (1000 - this.z) / 1000;
           const angle = Math.atan2(dy, dx);
-          this.x += Math.cos(angle) * influence * 0.2;
-          this.y += Math.sin(angle) * influence * 0.2;
+          this.x += Math.cos(angle) * influence * 0.1;
+          this.y += Math.sin(angle) * influence * 0.1;
         }
       }
       draw(ctx) {
         const scale = (1000 - this.z) / 1000;
-        ctx.globalAlpha = scale * 0.6;
-        ctx.filter = `blur(${this.z / 200}px)`;
+        ctx.globalAlpha = scale * 0.5;
+        ctx.filter = `blur(${this.z / 250}px)`;
         ctx.fillStyle = CONFIG.colors.brand;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI*2);
+        ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI * 2);
         ctx.fill();
         ctx.filter = 'none';
         ctx.globalAlpha = 1;
       }
     }
 
-    const particles = Array.from({length: 40}, () => new Particle());
+    const particles = Array.from({ length: 20 }, () => new Particle()); // further reduced count
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const cursor = {x: this.state.cursor.x, y: this.state.cursor.y};
+      const cursor = { x: this.state.cursor.x, y: this.state.cursor.y };
       particles.forEach(p => { p.update(cursor); p.draw(ctx); });
       requestAnimationFrame(render);
     };
