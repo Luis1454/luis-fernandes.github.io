@@ -1,81 +1,79 @@
 /* ---------------------------------------------------------------
-   Global design tokens (terminal‑style)
+   Global design tokens (TUI style – neon accent)
    --------------------------------------------------------------- */
 :root {
-  --bg: #000;                     /* true black */
-  --text: #00ff00;                /* classic green */
-  --muted: #55ff55;               /* softer green for prompts */
-  --border: rgba(0,255,0,0.15);
+  --bg: #0d0d0d;               /* deep dark background */
+  --panel: #1a1a1a;            /* panels slightly lighter */
+  --text: #e0e0e0;             /* light gray text */
+  --accent: #00ff80;           /* neon cyan accent */
+  --border: rgba(0,255,128,0.2);
   --font-mono: 'JetBrains Mono', monospace;
-  --transition: all 0.1s ease;
+  --transition: all 0.12s ease;
 }
 
 /* ---------------------------------------------------------------
    Reset & base
    --------------------------------------------------------------- */
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-html { font-family: var(--font-mono); background: var(--bg); color: var(--text); overflow:hidden; }
-body { height:100vh; display:flex; align-items:center; justify-content:center; }
+html, body { height:100%; font-family: var(--font-mono); background: var(--bg); color: var(--text); overflow:hidden; }
 
 /* ---------------------------------------------------------------
-   Terminal container
+   Layout – CSS Grid (header, sidebar, main, footer)
    --------------------------------------------------------------- */
-#terminal {
-  width: 94vw;
-  max-width: 1200px;
-  height: 90vh;
-  background: var(--bg);
+.tui {
+  display:grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 14rem 1fr;
+  width:100%; height:100%;
+  contain:layout style paint;
+}
+.tui-header { grid-column:1 / span 2; background: var(--panel); padding:.6rem 1rem; border-bottom:1px solid var(--border); box-shadow:0 2px 6px var(--border); }
+.tui-title { font-weight:600; color: var(--accent); }
+.tui-sidebar { background: var(--panel); border-right:1px solid var(--border); overflow-y:auto; }
+.tui-menu { list-style:none; padding:.6rem; }
+.tui-menu-item {
+  padding:.4rem .8rem;
+  cursor:pointer;
+  border-radius:4px;
+  transition: var(--transition);
   color: var(--text);
-  border: 1px solid var(--border);
-  padding: 1rem;
-  overflow-y:auto;
-  overflow-x:hidden;
-  font-size: clamp(0.85rem, 1vw, 1.1rem);
-  line-height:1.4;
-  resize: both;
-  contain: layout style paint;
 }
-
-/* Scroll‑bar – subtle, terminal‑like */
-#terminal::-webkit-scrollbar { width: .6rem; }
-#terminal::-webkit-scrollbar-track { background: var(--bg); }
-#terminal::-webkit-scrollbar-thumb { background: var(--border); border-radius:.3rem; }
+.tui-menu-item:hover, .tui-menu-item.active { background: var(--border); color: var(--accent); }
+.tui-main { background: var(--bg); padding:.8rem 1rem; overflow-y:auto; outline:none; }
+.tui-footer { display:flex; align-items:center; background: var(--panel); padding:.5rem 1rem; border-top:1px solid var(--border); }
+.tui-prompt { margin-right:.5rem; color: var(--accent); font-weight:600; }
+.tui-input { flex:1; background:none; border:none; color:var(--text); font:inherit; outline:none; }
+.tui-input::placeholder { color:rgba(224,224,224,0.4); }
 
 /* ---------------------------------------------------------------
-   Prompt line
+   Output helpers – fade‑in animation
    --------------------------------------------------------------- */
-.prompt {
-  display:flex;
-  align-items:center;
+@keyframes fadeInSlide {
+  from { opacity:0; transform:translateY(0.4rem); }
+  to   { opacity:1; transform:translateY(0); }
 }
-.prompt .user { color: var(--muted); }
-.prompt .at   { color: var(--text); }
-.prompt .path { color: var(--muted); }
-.prompt .caret {
-  margin-left:.2rem;
-  width: .6rem;
-  height:1rem;
-  background: var(--text);
-  animation: blink 1s steps(2,start) infinite;
+.output {
+  white-space:pre-wrap; word-break:break-word; margin-bottom:.6rem;
+  animation: fadeInSlide .25s ease forwards;
 }
-@keyframes blink { 0%,100% { opacity:1;} 50% { opacity:0;} }
-
-/* ---------------------------------------------------------------
-   Output line utilities
-   --------------------------------------------------------------- */
-.output { white-space:pre-wrap; word-break:break-word; }
-.error  { color:#ff5555; }
-.success{ color:#55ff55; }
-
-/* ---------------------------------------------------------------
-   Command‑specific stylings (optional)
-   --------------------------------------------------------------- */
 .cmd-help   { color:#aaffaa; }
 .cmd-about  { color:#aaffff; }
 .cmd-projects { color:#ffffaa; }
 .cmd-contact { color:#ffaaaa; }
+.error  { color:#ff5555; }
+.success{ color:#55ff55; }
 
 /* ---------------------------------------------------------------
-   Accessibility
+   Scrollbars – subtle neon
    --------------------------------------------------------------- */
-:focus-visible { outline:2px solid var(--muted); outline-offset:2px; }
+.tui-sidebar::-webkit-scrollbar,
+.tui-main::-webkit-scrollbar { width:.6rem; }
+.tui-sidebar::-webkit-scrollbar-track,
+.tui-main::-webkit-scrollbar-track { background:var(--panel); }
+.tui-sidebar::-webkit-scrollbar-thumb,
+.tui-main::-webkit-scrollbar-thumb { background:var(--border); border-radius:.3rem; }
+
+/* ---------------------------------------------------------------
+   Accessibility – focus
+   --------------------------------------------------------------- */
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }

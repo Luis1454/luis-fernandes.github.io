@@ -1,13 +1,19 @@
 /* ---------------------------------------------------------------
-   CoreEngine – zero‑dependency TUI controller
+   CoreEngine – refined TUI controller with typewriter banner & fade‑in output
    --------------------------------------------------------------- */
 'use strict';
 
 class CoreEngine {
   constructor() {
-    this.terminal = document.getElementById('terminal');
+    // DOM elements
+    this.outputPane = document.querySelector('.tui-main');
+    this.inputField = document.querySelector('.tui-input');
+    this.menuItems = document.querySelectorAll('.tui-menu-item');
+
     this.history = [];
     this.historyIdx = -1;
+    this.bannerTyped = false;
+
     this.init();
   }
 
@@ -15,16 +21,21 @@ class CoreEngine {
      Bootstrap
   ----------------------------------------------------------------- */
   init() {
-    // Remove the JS‑disabled overlay asap
     document.body.classList.remove('js-disabled');
-    this.writeBanner();
-    this.writePrompt();
-    // Global listeners (passive)
-    window.addEventListener('keydown', e => this.onKeyDown(e), {passive:true});
-    // Resize → debounce (avoid layout thrash)
-    window.addEventListener('resize', this.debounce(() => {
-      this.terminal.scrollTop = this.terminal.scrollHeight;
-    }, 150));
+    // Focus input early
+    this.inputField.focus();
+    // Global listeners
+    this.inputField.addEventListener('keydown', e => this.onKeyDown(e));
+    window.addEventListener('resize', this.debounce(() => this.scrollToBottom(), 120));
+    // Sidebar command click shortcut
+    this.menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        this.handleCommand(item.dataset.cmd);
+        this.highlightMenu(item.dataset.cmd);
+      });
+    });
+    // Show banner with typewriter effect
+    this.typewriterBanner();
   }
 
   /* -----------------------------------------------------------------
@@ -38,137 +49,79 @@ class CoreEngine {
     };
   }
 
+  scrollToBottom() {
+    this.outputPane.scrollTop = this.outputPane.scrollHeight;
+  }
+
   write(html = '', cls = '') {
     const line = document.createElement('div');
     line.className = `output ${cls}`.trim();
     line.innerHTML = html;
-    this.terminal.appendChild(line);
-    // Keep newest content in view
-    this.terminal.scrollTop = this.terminal.scrollHeight;
-  }
-
-  writeBanner() {
-    const banner = `
-      <span class="cmd-about">┌─[${new Date().getFullYear()}]─[Luis Fernandes]─[portfolio]</span>
-      <br><span class="cmd-about">│ Hi! I’m a senior systems engineer (HPC, low‑level, aerospace).</span>
-      <br><span class="cmd-about">│ Type <strong>help</strong> for available commands.</span>
-      <br><span class="cmd-about">└─$</span>`;
-    this.write(banner, 'cmd-about');
-  }
-
-  writePrompt() {
-    const prompt = document.createElement('div');
-    prompt.className = 'prompt';
-    prompt.innerHTML = `
-      <span class="user">guest</span><span class="at">@</span>
-      <span class="path">~</span><span class="caret"></span>
-    `;
-    this.terminal.appendChild(prompt);
-    this.terminal.scrollTop = this.terminal.scrollHeight;
-    this.currentPrompt = prompt;
+    this.outputPane.appendChild(line);
+    this.scrollToBottom();
   }
 
   /* -----------------------------------------------------------------
-     Input handling
+     Typewriter banner (simulates OS boot)
+  ----------------------------------------------------------------- */
+  async typewriterBanner() {
+    const lines = [
+      `<span class="cmd-about">┌─[${new Date().getFullYear()}]─[Luis Fernandes]─[TUI]</span>`,
+      `<span class="cmd-about">│ Welcome to my interactive portfolio.</span>`,
+      `<span class="cmd-about">│ Type <strong>help</strong> for available commands.</span>`,
+      `<span class="cmd-about">└─$</span>`
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      await new Promise(r => setTimeout(r, 150)); // slight delay per line
+      this.write(lines[i], 'cmd-about');
+    }
+    this.bannerTyped = true;
+    this.inputField.focus();
+  }
+
+  /* -----------------------------------------------------------------
+     Input handling – Enter, history navigation
   ----------------------------------------------------------------- */
   onKeyDown(e) {
-    if (!this.currentPrompt) return;
-    const key = e.key;
-
-    // Printable characters
-    if (key.length === 1 && !e.ctrlKey && !e.metaKey) {
-      this.appendToPrompt(key);
-      return;
-    }
-
-    // Backspace
-    if (key === 'Backspace') {
-      this.removeFromPrompt();
-      e.preventDefault();
-      return;
-    }
-
-    // Enter → execute
-    if (key === 'Enter') {
-      const cmd = this.currentInput.trim();
-      this.history.push(cmd);
+    if (e.key === 'Enter') {
+      const raw = this.inputField.value.trim();
+      if (!raw) return;
+      this.inputField.value = '';
+      // Echo user command (styled)
+      this.write(`<span class="cmd-user">${raw}</span>`, 'cmd-user');
+      // Store history
+      this.history.push(raw);
       this.historyIdx = this.history.length;
-      this.finalizePrompt(cmd);
-      this.executeCommand(cmd);
-      this.writePrompt();
+      this.handleCommand(raw);
       e.preventDefault();
       return;
     }
 
-    // Arrow Up/Down → browse history
-    if (key === 'ArrowUp') {
+    // History navigation (up/down) – only when input is focused
+    if (e.key === 'ArrowUp') {
       if (this.historyIdx > 0) {
         this.historyIdx--;
-        this.setPrompt(this.history[this.historyIdx]);
+        this.inputField.value = this.history[this.historyIdx];
       }
       e.preventDefault();
-      return;
     }
-    if (key === 'ArrowDown') {
+    if (e.key === 'ArrowDown') {
       if (this.historyIdx < this.history.length - 1) {
         this.historyIdx++;
-        this.setPrompt(this.history[this.historyIdx]);
+        this.inputField.value = this.history[this.historyIdx];
       } else {
         this.historyIdx = this.history.length;
-        this.setPrompt('');
+        this.inputField.value = '';
       }
       e.preventDefault();
-      return;
     }
-  }
-
-  get currentInput() {
-    return this.currentPrompt.dataset.input || '';
-  }
-
-  set currentInput(val) {
-    this.currentPrompt.dataset.input = val;
-  }
-
-  appendToPrompt(ch) {
-    this.currentInput += ch;
-    this.renderPrompt();
-  }
-
-  removeFromPrompt() {
-    this.currentInput = this.currentInput.slice(0, -1);
-    this.renderPrompt();
-  }
-
-  setPrompt(text) {
-    this.currentInput = text;
-    this.renderPrompt();
-  }
-
-  renderPrompt() {
-    const existing = this.currentPrompt.querySelector('.input');
-    if (existing) existing.textContent = this.currentInput;
-    else {
-      const span = document.createElement('span');
-      span.className = 'input';
-      span.textContent = this.currentInput;
-      this.currentPrompt.insertBefore(span, this.currentPrompt.querySelector('.caret'));
-    }
-  }
-
-  finalizePrompt(command) {
-    const line = document.createElement('div');
-    line.className = 'output';
-    line.innerHTML = this.currentPrompt.innerHTML;
-    this.terminal.replaceChild(line, this.currentPrompt);
-    this.currentPrompt = null;
   }
 
   /* -----------------------------------------------------------------
      Command dispatcher
   ----------------------------------------------------------------- */
-  executeCommand(raw) {
-    const cmd = raw.trim().toLowerCase();
+  handleCommand(raw) {
+    const cmd = raw.toLowerCase();
     const commands = {
       help: () => this.write(`
         <strong>help</strong>       – list commands
@@ -182,9 +135,9 @@ class CoreEngine {
       about: () => this.write(`
         ┌─[about]
         │ Luis Fernandes – senior systems engineer.
-        │ • HPC & GPU acceleration (CUDA, OpenCL, AVX2)
-        │ • Low‑level architecture (C/C++, Rust, Assembly)
-        │ • Aerospace telemetry & real‑time DSP
+        │ • HPC & GPU (CUDA, OpenCL, AVX2)
+        │ • Low‑level (C/C++, Rust, Assembly)
+        │ • Aerospace telemetry & DSP
         └─$`, 'cmd-about'),
 
       projects: () => {
@@ -204,7 +157,7 @@ class CoreEngine {
         │ GitHub  : https://github.com/Luis1454
         └─$`, 'cmd-contact'),
 
-      clear: () => { this.terminal.innerHTML = ''; },
+      clear: () => { this.outputPane.innerHTML = ''; },
 
       date: () => {
         const now = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
@@ -214,14 +167,22 @@ class CoreEngine {
 
     if (commands[cmd]) {
       commands[cmd]();
+      this.highlightMenu(cmd);
     } else if (cmd) {
       this.write(`<span class="error">command not found: ${cmd}</span>`, 'error');
     }
   }
+
+  highlightMenu(cmd) {
+    this.menuItems.forEach(item => {
+      if (item.dataset.cmd === cmd) item.classList.add('active');
+      else item.classList.remove('active');
+    });
+  }
 }
 
 /* -----------------------------------------------------------------
-   Boot the engine when the DOM is ready
+   Boot the engine when DOM is ready
 ----------------------------------------------------------------- */
 if (document.readyState === 'loading')
   document.addEventListener('DOMContentLoaded', () => new CoreEngine());

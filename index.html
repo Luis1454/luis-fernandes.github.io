@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luis Fernandes – TUI Portfolio</title>
   <meta name="description"
-        content="Senior systems engineer specialized in HPC, low‑level, aerospace software – presented as an interactive terminal UI.">
-  <!-- Open‑Graph / SEO -->
+        content="Senior systems engineer specialized in HPC, low‑level, aerospace software – presented as an interactive text‑based UI (TUI).">
+  <!-- Open‑Graph -->
   <meta property="og:title" content="Luis Fernandes – TUI Portfolio">
-  <meta property="og:description" content="Interactive terminal‑style showcase of high‑performance engineering work.">
+  <meta property="og:description" content="Interactive text‑based UI (TUI) showcase of high‑performance engineering work.">
   <meta property="og:image" content="https://picsum.photos/seed/tui/1200/630">
   <meta property="og:url" content="https://luis-fernandes.github.io/">
   <meta property="og:type" content="website">
 
-  <!-- Font‑stack (pre‑loaded, display‑swap) -->
+  <!-- Font – monospaced -->
   <link rel="preload"
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
         as="style"
@@ -23,10 +23,27 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="js-disabled" aria-live="polite">
-  <!-- Full‑screen terminal container -->
-  <div id="terminal" role="region" aria-label="Interactive terminal UI"></div>
+  <div class="tui" role="region" aria-label="Interactive text‑based UI">
+    <header class="tui-header" aria-label="Header">
+      <span class="tui-title">Luis Fernandes – TUI Portfolio</span>
+    </header>
+    <nav class="tui-sidebar" aria-label="Command menu">
+      <ul class="tui-menu">
+        <li data-cmd="help" class="tui-menu-item">help</li>
+        <li data-cmd="about" class="tui-menu-item">about</li>
+        <li data-cmd="projects" class="tui-menu-item">projects</li>
+        <li data-cmd="contact" class="tui-menu-item">contact</li>
+        <li data-cmd="clear" class="tui-menu-item">clear</li>
+        <li data-cmd="date" class="tui-menu-item">date</li>
+      </ul>
+    </nav>
+    <main class="tui-main" aria-label="Output console" tabindex="0"></main>
+    <footer class="tui-footer" aria-label="Command input">
+      <span class="tui-prompt">guest@~$</span>
+      <input type="text" class="tui-input" aria-label="Enter command" autocomplete="off" autofocus />
+    </footer>
+  </div>
 
   <script src="main.js" defer></script>
 </body>
