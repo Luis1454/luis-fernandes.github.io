@@ -1,188 +1,148 @@
 /* ---------------------------------------------------------------
-   CoreEngine – refined TUI controller with typewriter banner & fade‑in output
+   CoreEngine – renders an ASCII‑style UI and handles navigation
    --------------------------------------------------------------- */
 'use strict';
 
 class CoreEngine {
   constructor() {
-    // DOM elements
-    this.outputPane = document.querySelector('.tui-main');
-    this.inputField = document.querySelector('.tui-input');
-    this.menuItems = document.querySelectorAll('.tui-menu-item');
+    this.screen = document.getElementById('tui-screen');
 
-    this.history = [];
-    this.historyIdx = -1;
-    this.bannerTyped = false;
-
-    this.init();
-  }
-
-  /* -----------------------------------------------------------------
-     Bootstrap
-  ----------------------------------------------------------------- */
-  init() {
-    document.body.classList.remove('js-disabled');
-    // Focus input early
-    this.inputField.focus();
-    // Global listeners
-    this.inputField.addEventListener('keydown', e => this.onKeyDown(e));
-    window.addEventListener('resize', this.debounce(() => this.scrollToBottom(), 120));
-    // Sidebar command click shortcut
-    this.menuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        this.handleCommand(item.dataset.cmd);
-        this.highlightMenu(item.dataset.cmd);
-      });
-    });
-    // Show banner with typewriter effect
-    this.typewriterBanner();
-  }
-
-  /* -----------------------------------------------------------------
-     Utilities
-  ----------------------------------------------------------------- */
-  debounce(fn, wait) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => fn.apply(this, args), wait);
+    // Page content (plain‑text blocks)
+    this.pages = {
+      home: this.renderHome(),
+      about: this.renderAbout(),
+      projects: this.renderProjects(),
+      contact: this.renderContact(),
     };
-  }
+    this.current = 'home';
+    this.render();
 
-  scrollToBottom() {
-    this.outputPane.scrollTop = this.outputPane.scrollHeight;
-  }
-
-  write(html = '', cls = '') {
-    const line = document.createElement('div');
-    line.className = `output ${cls}`.trim();
-    line.innerHTML = html;
-    this.outputPane.appendChild(line);
-    this.scrollToBottom();
+    // Arrow‑key navigation (← / →)
+    window.addEventListener('keydown', e => this.onKey(e));
+    // Click navigation – clicking on menu label switches pages
+    this.screen.addEventListener('click', e => this.onClick(e));
   }
 
   /* -----------------------------------------------------------------
-     Typewriter banner (simulates OS boot)
+     Keyboard handling – left/right arrows cycle pages
   ----------------------------------------------------------------- */
-  async typewriterBanner() {
-    const lines = [
-      `<span class="cmd-about">┌─[${new Date().getFullYear()}]─[Luis Fernandes]─[TUI]</span>`,
-      `<span class="cmd-about">│ Welcome to my interactive portfolio.</span>`,
-      `<span class="cmd-about">│ Type <strong>help</strong> for available commands.</span>`,
-      `<span class="cmd-about">└─$</span>`
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      await new Promise(r => setTimeout(r, 150)); // slight delay per line
-      this.write(lines[i], 'cmd-about');
-    }
-    this.bannerTyped = true;
-    this.inputField.focus();
-  }
-
-  /* -----------------------------------------------------------------
-     Input handling – Enter, history navigation
-  ----------------------------------------------------------------- */
-  onKeyDown(e) {
-    if (e.key === 'Enter') {
-      const raw = this.inputField.value.trim();
-      if (!raw) return;
-      this.inputField.value = '';
-      // Echo user command (styled)
-      this.write(`<span class="cmd-user">${raw}</span>`, 'cmd-user');
-      // Store history
-      this.history.push(raw);
-      this.historyIdx = this.history.length;
-      this.handleCommand(raw);
+  onKey(e) {
+    if (e.key === 'ArrowRight') {
+      this.switchTo(this.nextPage());
       e.preventDefault();
-      return;
-    }
-
-    // History navigation (up/down) – only when input is focused
-    if (e.key === 'ArrowUp') {
-      if (this.historyIdx > 0) {
-        this.historyIdx--;
-        this.inputField.value = this.history[this.historyIdx];
-      }
-      e.preventDefault();
-    }
-    if (e.key === 'ArrowDown') {
-      if (this.historyIdx < this.history.length - 1) {
-        this.historyIdx++;
-        this.inputField.value = this.history[this.historyIdx];
-      } else {
-        this.historyIdx = this.history.length;
-        this.inputField.value = '';
-      }
+    } else if (e.key === 'ArrowLeft') {
+      this.switchTo(this.prevPage());
       e.preventDefault();
     }
   }
 
   /* -----------------------------------------------------------------
-     Command dispatcher
+     Click handling – clicking on a menu label switches pages
   ----------------------------------------------------------------- */
-  handleCommand(raw) {
-    const cmd = raw.toLowerCase();
-    const commands = {
-      help: () => this.write(`
-        <strong>help</strong>       – list commands
-        <strong>about</strong>      – short bio
-        <strong>projects</strong>   – list of projects
-        <strong>contact</strong>    – contact information
-        <strong>clear</strong>      – clear screen
-        <strong>date</strong>       – show current date
-      `, 'cmd-help'),
-
-      about: () => this.write(`
-        ┌─[about]
-        │ Luis Fernandes – senior systems engineer.
-        │ • HPC & GPU (CUDA, OpenCL, AVX2)
-        │ • Low‑level (C/C++, Rust, Assembly)
-        │ • Aerospace telemetry & DSP
-        └─$`, 'cmd-about'),
-
-      projects: () => {
-        const list = `
-          ┌─[projects]
-          │ 1) LBR Telemetry Receiver – CUDA, SDR, real‑time pipeline
-          │ 2) Backlight N‑Body Engine – SIMD‑optimized, 60 FPS, 1000+ bodies
-          │ 3) Relativistic Raytracer – OptiX + CUDA ray‑tracing
-          └─$`;
-        this.write(list, 'cmd-projects');
-      },
-
-      contact: () => this.write(`
-        ┌─[contact]
-        │ Email   : luis.fernandes@epitech.eu
-        │ LinkedIn: https://linkedin.com/in/luis-fernandes-289465231/
-        │ GitHub  : https://github.com/Luis1454
-        └─$`, 'cmd-contact'),
-
-      clear: () => { this.outputPane.innerHTML = ''; },
-
-      date: () => {
-        const now = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
-        this.write(`<span class="success">${now}</span>`, 'success');
-      }
-    };
-
-    if (commands[cmd]) {
-      commands[cmd]();
-      this.highlightMenu(cmd);
-    } else if (cmd) {
-      this.write(`<span class="error">command not found: ${cmd}</span>`, 'error');
+  onClick(e) {
+    const txt = e.target.textContent.trim().toLowerCase();
+    if (['home', 'about', 'projects', 'contact'].includes(txt)) {
+      this.switchTo(txt);
     }
   }
 
-  highlightMenu(cmd) {
-    this.menuItems.forEach(item => {
-      if (item.dataset.cmd === cmd) item.classList.add('active');
-      else item.classList.remove('active');
-    });
+  nextPage() {
+    const keys = Object.keys(this.pages);
+    const idx = keys.indexOf(this.current);
+    return keys[(idx + 1) % keys.length];
+  }
+
+  prevPage() {
+    const keys = Object.keys(this.pages);
+    const idx = keys.indexOf(this.current);
+    return keys[(idx - 1 + keys.length) % keys.length];
+  }
+
+  switchTo(page) {
+    if (!this.pages[page]) return;
+    this.current = page;
+    this.render();
+  }
+
+  /* -----------------------------------------------------------------
+     Rendering – builds the full ASCII screen as a single string
+  ----------------------------------------------------------------- */
+  render() {
+    const topBar  = this.renderTopBar();
+    const menuBar = this.renderMenuBar();
+    const body    = this.pages[this.current];
+    const footer  = this.renderFooter();
+    this.screen.textContent = `${topBar}\n${menuBar}\n${body}\n${footer}`;
+  }
+
+  renderTopBar() {
+    const title = ' Luis Fernandes – Portfolio ';
+    const filler = '─'.repeat(70 - title.length);
+    return `┌${title}${filler}┐`;
+  }
+
+  renderMenuBar() {
+    const items = ['home', 'about', 'projects', 'contact'];
+    return items.map(name => {
+      const label = name.toUpperCase();
+      return name === this.current
+        ? `│ [${label}] `
+        : `│  ${label}  `;
+    }).join('') + '│';
+  }
+
+  renderFooter() {
+    const date = new Date().toLocaleDateString('fr-FR');
+    const time = new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+    return `└${'─'.repeat(78)}┘\n${date} ${time}`;
+  }
+
+  /* -----------------------------------------------------------------
+     Page bodies – plain ASCII strings (feel free to edit)
+  ----------------------------------------------------------------- */
+  renderHome() {
+    return `
+│ Welcome to my interactive ASCII‑style portfolio.                 │
+│                                                               │
+│ Use the ← / → arrow keys (or click the menu) to move between│
+│ sections.                                                     │
+│                                                               │
+│ Press any key to explore.                                   │`;
+  }
+
+  renderAbout() {
+    return `
+│ About me:                                                    │
+│   • Senior systems engineer – HPC, low‑level, aerospace.      │
+│   • Passionate about performance‑first software.              │
+│   • Loves retro UI aesthetics.                                 │
+│                                                               │
+│ Skills:                                                     │
+│   • C / C++20 / Rust / Assembly                              │
+│   • CUDA / OpenCL / AVX2                                     │
+│   • Linux kernel / Docker / CI‑CD                              │`;
+  }
+
+  renderProjects() {
+    return `
+│ Projects (brief):                                          │
+│   1) LBR Telemetry Receiver – CUDA‑based, real‑time SDR.    │
+│   2) Backlight N‑Body Engine – SIMD‑optimized, 60 FPS,     │
+│      1000+ bodies.                                           │
+│   3) Relativistic Raytracer – OptiX + CUDA ray‑tracing.    │`;
+  }
+
+  renderContact() {
+    return `
+│ Contact:                                                    │
+│   Email   : your@email.com                                  │
+│   LinkedIn: https://linkedin.com/in/username                │
+│   GitHub  : https://github.com/username                     │`;
   }
 }
 
 /* -----------------------------------------------------------------
-   Boot the engine when DOM is ready
+   Initialise when the DOM is ready
 ----------------------------------------------------------------- */
 if (document.readyState === 'loading')
   document.addEventListener('DOMContentLoaded', () => new CoreEngine());
