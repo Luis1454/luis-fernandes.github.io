@@ -1204,12 +1204,12 @@ PROJECTS_DATA = {
         "status_right": "x86_64 NASM • Assembly • Low-Level ABI"
     },
 
-    "c-programming-bootcamp": {
-        "title": "c-programming-bootcamp — C Systems & Algorithms Bootcamp Suite",
+    "c-pool": {
+        "title": "c-pool — Piscine C Systems Programming Suite",
         "subtitle": "18 Modules: Pointers, Memory Allocators, Trees & Bitwise Ops",
         "badge": "● 18/18 MODULES PASS",
         "badge_color": C_GREEN,
-        "dir": "~/c-programming-bootcamp",
+        "dir": "~/c-pool",
         "cmd": "./run_test_suite_all.sh",
         "lines": [
             [("[C POOL VERIFICATION MATRIX] ", C_BLUE), ("Compiling with gcc -Wall -Wextra -Werror:", C_TEXT_WHITE)],
@@ -1259,12 +1259,12 @@ PROJECTS_DATA = {
         "status_right": "Bytecode VM • Assembler • Systems C"
     },
 
-    "cpp-paradigms-bootcamp": {
-        "title": "cpp-paradigms-bootcamp — Modern C++ Paradigms Bootcamp Suite",
+    "cpp-pool": {
+        "title": "cpp-pool — Piscine C++ Paradigms Suite",
         "subtitle": "15 Modules: RAII, OOP, Templates, Polymorphism & Smart Pointers",
         "badge": "● C++20 STANDARD",
         "badge_color": C_CYAN,
-        "dir": "~/cpp-paradigms-bootcamp",
+        "dir": "~/cpp-pool",
         "cmd": "./test_runner_cpp.sh",
         "lines": [
             [("[MODERN C++ PARADIGMS VERIFICATION] ", C_BLUE), ("Compiling with g++ -std=c++20 -Wall -Wextra:", C_TEXT_WHITE)],

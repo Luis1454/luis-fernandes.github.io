@@ -785,9 +785,9 @@ window.PORTFOLIO_PROJECTS_DATA = [
     "featured": false
   },
   {
-    "id": "c-programming-bootcamp",
-    "title": "C Systems Programming Intensive & Foundations Suite",
-    "module": "C Systems Programming Intensive & Foundations Suite",
+    "id": "c-pool",
+    "title": "C Pool",
+    "module": "Piscine C · Systems Immersion Suite",
     "category": "Systems & Kernel",
     "domain": "systems-kernel",
     "languages": [
@@ -797,10 +797,10 @@ window.PORTFOLIO_PROJECTS_DATA = [
       "Data Structures",
       "POSIX I/O"
     ],
-    "summary": "This repository captures an intensive, immersion-based systems programming track designed to master the fundamentals of modern computing without standard library dependencies. It covers the complete progression from hardware data representation and pointer arithmetic to custom libc implementations, memory managers, and multi-file architecture orchestration.",
-    "summary_fr": "Suite fondamentale de programmation système en C : arithmétique de pointeurs, allocation tas, listes chaînées et E/S POSIX.",
-    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/c-programming-bootcamp",
-    "screenshot": "assets/project-art/c-programming-bootcamp.png",
+    "summary": "Piscine C intensive systems programming immersion track covering low-level memory allocation, pointer mechanics, custom standard libc routines, linked lists, POSIX file descriptor I/O, and recursive algorithms without standard library dependencies.",
+    "summary_fr": "Piscine C d'immersion intensive en programmation système : allocation bas-niveau, arithmétique de pointeurs, réimplémentation de la libc, listes chaînées et E/S POSIX.",
+    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/c-pool",
+    "screenshot": "assets/project-art/c-pool.png",
     "featured": false
   },
   {
@@ -823,9 +823,9 @@ window.PORTFOLIO_PROJECTS_DATA = [
     "featured": false
   },
   {
-    "id": "cpp-paradigms-bootcamp",
-    "title": "Modern C++ & Software Engineering Paradigms Suite",
-    "module": "Modern C++ & Software Engineering Paradigms Suite",
+    "id": "cpp-pool",
+    "title": "C++ Pool",
+    "module": "Piscine C++ · Object-Oriented Paradigms Suite",
     "category": "Systems & Kernel",
     "domain": "systems-kernel",
     "languages": [
@@ -835,10 +835,10 @@ window.PORTFOLIO_PROJECTS_DATA = [
       "Virtual Tables",
       "STL"
     ],
-    "summary": "This repository captures an intensive deep dive into C++ object-oriented paradigms and modern idioms, bridging low-level procedural systems with modern high-level abstraction. The modules systematically dismantle the abstraction cost of C++, exploring internal compiler memory layouts, virtual method dispatch overhead, compile-time template evaluation, and zero-overhead idioms.",
-    "summary_fr": "Architecture logicielle et paradigmes C++ moderne : RAII, surcharge d'opérateurs, métaprogrammation par templates et STL.",
-    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/cpp-paradigms-bootcamp",
-    "screenshot": "assets/project-art/cpp-paradigms-bootcamp.png",
+    "summary": "Piscine C++ intensive immersion track covering object-oriented paradigms, RAII lifecycle guarantees, operator overloading, stream I/O, runtime polymorphism, virtual method dispatch tables (vtables), template metaprogramming, and STL algorithms.",
+    "summary_fr": "Piscine C++ d'immersion intensive : paradigmes orientés objet, garanties RAII, polymorphisme d'exécution (vtables), programmation générique par templates et STL.",
+    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/cpp-pool",
+    "screenshot": "assets/project-art/cpp-pool.png",
     "featured": false
   },
   {
