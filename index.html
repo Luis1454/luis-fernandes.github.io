@@ -1,27 +1,922 @@
-<!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luis Fernandes – TUI Portfolio</title>
-  <meta name="description"
-        content="Interactive ASCII‑style UI that showcases a high‑performance systems‑engineer portfolio.">
-
-  <!-- Monospaced font (JetBrains Mono) -->
-  <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
-        as="style"
-        onload="this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
-                rel="stylesheet"></noscript>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05070a">
+  <meta name="description" content="Luis Fernandes — Embedded &amp; Systems Software Engineer. C, C++20, Linux internals, RF telemetry, FPGA, GPU acceleration and applied AI.">
+  <title>Luis Fernandes — Embedded &amp; Systems Software Engineer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-<body class="js-disabled" aria-live="polite">
-  <!-- The whole UI is rendered inside this <pre> element -->
-  <pre id="tui-screen" aria-label="ASCII terminal UI"></pre>
+  <!-- Haute Atmosphère Terrestre & Numerical Simulation Canvas -->
+  <canvas id="cosmic-web-canvas" aria-hidden="true"></canvas>
+  <div class="cosmic-vignette" aria-hidden="true"></div>
 
-  <script src="main.js" defer></script>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#top" aria-label="Luis Fernandes — back to top">
+        <div class="wordmark-avatar-wrap">
+          <img src="assets/luis-fernandes.jpg" alt="Luis Fernandes" class="wordmark-avatar" width="34" height="34">
+          <span class="wordmark-dot" aria-hidden="true"></span>
+        </div>
+        <div class="wordmark-text">
+          <span class="wordmark-name">Luis Fernandes</span>
+          <span class="wordmark-sub" data-i18n="header.subtitle">Embedded &amp; Systems</span>
+        </div>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#experience" data-i18n="nav.experience">Experience</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#archive" data-i18n="nav.archive">Archive</a>
+        <a href="#matcher" data-i18n="nav.matcher">Matcher</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+          <button type="button" class="lang-btn active" data-lang-btn="fr">FR</button>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+        </div>
+        <a class="btn btn-outline btn-sm" href="#matcher" data-i18n="nav.match_btn">
+          Tester une offre
+        </a>
+        <a class="btn btn-primary btn-sm" href="assets/resume_systems.pdf" target="_blank" rel="noreferrer" data-i18n="nav.resume_btn">Resume ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-content">
+        <h1 id="hero-title" class="hero-title" data-i18n="hero.title">
+          <span class="gradient-text">Embedded Software Engineer.</span><br>
+          <em>HPC &amp; AI Research.</em>
+        </h1>
+
+        <p class="hero-lead" data-i18n="hero.lead">
+          I build deterministic C &amp; C++20 flight telemetry for NASA USLI rocketry, GPU-accelerated HPC simulations in CUDA (100M particles), low-power edge verification, and physics-informed AI systems.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#work" data-i18n="hero.btn_work">View selected work <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="#matcher" data-i18n="hero.btn_match">Tester une offre (Fit &amp; Projets)</a>
+          <a class="btn btn-outline" href="assets/resume_systems.pdf" target="_blank" rel="noreferrer" data-i18n="hero.btn_resume">Download resume <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <ul class="hero-links" aria-label="Profiles">
+          <li><a href="https://github.com/Luis1454" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/luisfernandes-eng" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.youtube.com/@_LuisFernandes_/" target="_blank" rel="noreferrer">YouTube</a></li>
+          <li><a href="mailto:luis.fernandes.contact@gmail.com">luis.fernandes.contact@gmail.com</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 01 / Work -->
+    <section id="work" class="section" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-eyebrow" data-i18n="sec01.eyebrow"><span>01</span> Selected work</div>
+            <h2 id="work-title" class="section-title" data-i18n="sec01.title">Featured projects</h2>
+          </div>
+          <p class="section-desc" data-i18n="sec01.desc">Five flagship builds across flight telemetry, astrophysical HPC, distributed compute and Linux internals.</p>
+        </div>
+
+        <div class="deck-container reveal" id="featured-deck" aria-roledescription="carousel" aria-label="Featured projects">
+          <div class="deck-header-strip">
+            <div class="deck-pills-list" role="tablist" aria-label="Choose a project">
+              <button class="deck-pill active" type="button" role="tab" data-deck-index="0" aria-selected="true" aria-controls="card-telemetry">
+                <span class="deck-pill-num">01</span><span class="deck-pill-name">LBR Telemetry</span>
+                <span class="deck-pill-timer" aria-hidden="true"><span class="deck-pill-fill"></span></span>
+              </button>
+              <button class="deck-pill" type="button" role="tab" data-deck-index="1" aria-selected="false" aria-controls="card-blitzar">
+                <span class="deck-pill-num">02</span><span class="deck-pill-name">BLITZAR (CUDA)</span>
+                <span class="deck-pill-timer" aria-hidden="true"><span class="deck-pill-fill"></span></span>
+              </button>
+              <button class="deck-pill" type="button" role="tab" data-deck-index="2" aria-selected="false" aria-controls="card-pyrocast">
+                <span class="deck-pill-num">03</span><span class="deck-pill-name">PyroCast (AI)</span>
+                <span class="deck-pill-timer" aria-hidden="true"><span class="deck-pill-fill"></span></span>
+              </button>
+              <button class="deck-pill" type="button" role="tab" data-deck-index="3" aria-selected="false" aria-controls="card-silicium">
+                <span class="deck-pill-num">04</span><span class="deck-pill-name">Silicium Network</span>
+                <span class="deck-pill-timer" aria-hidden="true"><span class="deck-pill-fill"></span></span>
+              </button>
+              <button class="deck-pill" type="button" role="tab" data-deck-index="4" aria-selected="false" aria-controls="card-raytracer">
+                <span class="deck-pill-num">05</span><span class="deck-pill-name">Relativistic Raytracer</span>
+                <span class="deck-pill-timer" aria-hidden="true"><span class="deck-pill-fill"></span></span>
+              </button>
+            </div>
+
+            <div class="deck-action-buttons">
+              <span class="deck-status-counter" id="deck-counter" aria-live="polite">1 / 5</span>
+              <button class="deck-btn-nav" id="deck-btn-prev" type="button" aria-label="Previous project"><span aria-hidden="true">←</span></button>
+              <button class="deck-btn-nav" id="deck-btn-toggle" type="button" aria-label="Pause auto-advance"><span class="play-icon" aria-hidden="true">❚❚</span></button>
+              <button class="deck-btn-nav" id="deck-btn-next" type="button" aria-label="Next project"><span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+
+          <div class="deck-stage is-stacked" id="deck-stage">
+            <!-- Featured 1: LBR Telemetry Receiver (NASA USLI) -->
+            <article class="product-card" id="card-telemetry" data-deck-index="0" data-deck-rank="0">
+              <canvas id="rf-waveform-canvas" class="tile-bg-canvas" aria-hidden="true"></canvas>
+              <div class="product-content">
+                <div class="product-meta-header">
+                  <span class="product-domain-tag">Aerospace &amp; Flight Telemetry // NASA Student Launch (USLI) · Long Beach Rocketry</span>
+                </div>
+                <h3 class="product-heading">LBR Telemetry &amp; Ground Control</h3>
+                <p class="product-punchline">
+                  Ground-station telemetry reception pipeline engineered for high-power NASA Student Launch rocketry. Reconstructs noisy 915 MHz Semtech SX1262 LoRa bitstreams with sub-millisecond FSM frame synchronization, Doppler compensation, and zero-copy IPC into a Qt Ground Control Station with &lt;20ms end-to-end latency.
+                </p>
+
+                <div class="product-spec-grid" aria-label="Technical Specifications">
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">RF Link</span>
+                    <span class="spec-tile-val">Semtech SX1262 LoRa (915 MHz)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">End-to-End Latency</span>
+                    <span class="spec-tile-val">&lt; 20ms (Doppler Compensated)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Stream Buffer</span>
+                    <span class="spec-tile-val">Lock-Free Zero-Copy IPC Ring</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Target System</span>
+                    <span class="spec-tile-val">Flight Software (FSW) &amp; Qt GCS</span>
+                  </div>
+                </div>
+
+                <div class="product-footer-row">
+                  <div class="product-stack-chips">
+                    <span class="product-chip">C++20</span>
+                    <span class="product-chip">NASA USLI</span>
+                    <span class="product-chip">LoRa / SX1262</span>
+                    <span class="product-chip">Doppler Comp</span>
+                    <span class="product-chip">Qt GCS</span>
+                    <span class="product-chip">Lock-Free Ring</span>
+                  </div>
+                  <div class="product-cta-row">
+                    <button class="btn btn-outline btn-sm product-preview-btn" data-project-id="lbr-telemetry" type="button">Showcase ⚡</button>
+                    <a class="btn btn-outline btn-sm" href="https://www.longbeachrocketry.com/" target="_blank" rel="noreferrer">Club Context ↗</a>
+                    <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/LBR-26-Ground-Software" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Featured 2: BLITZAR Astrophysical HPC Simulation -->
+            <article class="product-card" id="card-blitzar" data-deck-index="1" data-deck-rank="1">
+              <canvas id="spacetime-mesh-canvas" class="tile-bg-canvas" aria-hidden="true"></canvas>
+              <div class="product-content">
+                <div class="product-meta-header">
+                  <span class="product-domain-tag">Astrophysical HPC &amp; Numerical Simulation // Open-Source Research</span>
+                </div>
+                <h3 class="product-heading">BLITZAR: Astrophysical HPC Simulation</h3>
+                <p class="product-punchline">
+                  Massively parallel N-Body and Smoothed-Particle Hydrodynamics (SPH) engine in CUDA with Octree spatial acceleration for 100M particles. Optimized via Structure-of-Arrays (SoA) and memory coalescing to achieve 92% of RTX 4070 VRAM bandwidth; validated under NASA NPR-7150.2D &amp; NASA-STD-8739.8B engineering standards.
+                </p>
+
+                <div class="product-spec-grid" aria-label="Technical Specifications">
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Particle Scale</span>
+                    <span class="spec-tile-val">100,000,000 Particles (Octree)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Memory Saturation</span>
+                    <span class="spec-tile-val">92% VRAM Bandwidth (RTX 4070)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Numerical Solvers</span>
+                    <span class="spec-tile-val">Leapfrog &amp; Runge-Kutta (RK4)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Mission Standards</span>
+                    <span class="spec-tile-val">NASA NPR-7150.2D / STD-8739.8B</span>
+                  </div>
+                </div>
+
+                <div class="product-footer-row">
+                  <div class="product-stack-chips">
+                    <span class="product-chip">CUDA</span>
+                    <span class="product-chip">C++20</span>
+                    <span class="product-chip">N-Body / SPH</span>
+                    <span class="product-chip">Octree</span>
+                    <span class="product-chip">Leapfrog / RK4</span>
+                    <span class="product-chip">NASA Standards</span>
+                    <span class="product-chip">HPC</span>
+                  </div>
+                  <div class="product-cta-row">
+                    <button class="btn btn-outline btn-sm product-preview-btn" data-project-id="blitzar" type="button">Showcase ⚡</button>
+                    <a class="btn btn-outline btn-sm" href="https://youtu.be/j9Kk4c3_0WE" target="_blank" rel="noreferrer">Simulation Demo ↗</a>
+                    <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/BLITZAR" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Featured 3: PyroCast AI Wildfire Prediction -->
+            <article class="product-card" id="card-pyrocast" data-deck-index="2" data-deck-rank="2">
+              <canvas id="pyrocast-mesh-canvas" class="tile-bg-canvas" aria-hidden="true"></canvas>
+              <div class="product-content">
+                <div class="product-meta-header">
+                  <span class="product-domain-tag">Applied AI &amp; Computational Physics // Open-Source Research</span>
+                </div>
+                <h3 class="product-heading">PyroCast: AI Wildfire Spread Prediction</h3>
+                <p class="product-punchline">
+                  AI-driven wildfire behavior prediction and tactical mission simulation. Combines wildfire combustion physics, weather forcing, terrain-aware meshes, and Monte Carlo inference with 2D/3D thermodynamic CFD flow visualization for field-mission operations.
+                </p>
+
+                <div class="product-spec-grid" aria-label="Technical Specifications">
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Inference Core</span>
+                    <span class="spec-tile-val">Monte Carlo &amp; Neural Inference</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Physics Coupled</span>
+                    <span class="spec-tile-val">Terrain CFD &amp; Thermodynamics</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Spatial Meshes</span>
+                    <span class="spec-tile-val">Real-time 2D / 3D Geospatial Grids</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Operational Output</span>
+                    <span class="spec-tile-val">Tactical Fire-Risk &amp; Mission Maps</span>
+                  </div>
+                </div>
+
+                <div class="product-footer-row">
+                  <div class="product-stack-chips">
+                    <span class="product-chip">Python</span>
+                    <span class="product-chip">Applied AI</span>
+                    <span class="product-chip">Monte Carlo</span>
+                    <span class="product-chip">CFD Simulation</span>
+                    <span class="product-chip">Wildfire Physics</span>
+                    <span class="product-chip">GIS / 3D</span>
+                  </div>
+                  <div class="product-cta-row">
+                    <button class="btn btn-outline btn-sm product-preview-btn" data-project-id="pyrocast" type="button">Showcase ⚡</button>
+                    <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/pyrocast" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Featured 4: Silicium Network -->
+            <article class="product-card" id="card-silicium" data-deck-index="3" data-deck-rank="3">
+              <canvas id="silicium-grid-canvas" class="tile-bg-canvas" aria-hidden="true"></canvas>
+              <div class="product-content">
+                <div class="product-meta-header">
+                  <span class="product-domain-tag">Distributed Systems &amp; Edge Verification // Capstone Project (Founder &amp; Team Lead)</span>
+                </div>
+                <h3 class="product-heading">Silicium Network: Decentralized Compute Grid</h3>
+                <p class="product-punchline">
+                  Decentralized high-throughput compute grid harnessing low-power IoT devices via Solana (Rust/Anchor). Employs recursive delegation protocols with &lt;128 KB memory footprints for autonomous edge verification and a custom dockerized C++ ELF partitioner cutting task overhead by 30%.
+                </p>
+
+                <div class="product-spec-grid" aria-label="Technical Specifications">
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Memory Footprint</span>
+                    <span class="spec-tile-val">&lt; 128 KB Recursive Delegation</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Binary Partitioner</span>
+                    <span class="spec-tile-val">Dockerized C++ ELF (x86-64 / AArch)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Latency Overhead</span>
+                    <span class="spec-tile-val">-30% Task Dispatch Latency</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Consensus Engine</span>
+                    <span class="spec-tile-val">Solana / Rust / Anchor Protocol</span>
+                  </div>
+                </div>
+
+                <div class="product-footer-row">
+                  <div class="product-stack-chips">
+                    <span class="product-chip">Rust</span>
+                    <span class="product-chip">Anchor</span>
+                    <span class="product-chip">Solana</span>
+                    <span class="product-chip">C++20</span>
+                    <span class="product-chip">ELF Partitioner</span>
+                    <span class="product-chip">Edge Computing</span>
+                    <span class="product-chip">Docker</span>
+                  </div>
+                  <div class="product-cta-row">
+                    <button class="btn btn-outline btn-sm product-preview-btn" data-project-id="silicium-eip" type="button">Showcase ⚡</button>
+                    <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/epitech-portfolio/tree/main/projects/distributed-systems/silicium-eip" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Featured 5: Relativistic Raytracer -->
+            <article class="product-card" id="card-raytracer" data-deck-index="4" data-deck-rank="4">
+              <canvas id="geodesic-ray-canvas" class="tile-bg-canvas" aria-hidden="true"></canvas>
+              <div class="product-content">
+                <div class="product-meta-header">
+                  <span class="product-domain-tag">Computational Physics &amp; Optics // Parallel Computing</span>
+                </div>
+                <h3 class="product-heading">Relativistic Raytracer (Schwarzschild &amp; Kerr Metrics)</h3>
+                <p class="product-punchline">
+                  Curved-spacetime optical raytracer numerically integrating null geodesic differential equations under General Relativity. Solves photon deflection, gravitational lensing, accretion shadows, and Doppler redshift around spinning Kerr black holes using CUDA four-vector matrices; achieves 140+ frames/hour in 8K export.
+                </p>
+
+                <div class="product-spec-grid" aria-label="Technical Specifications">
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Metric Space</span>
+                    <span class="spec-tile-val">Schwarzschild &amp; Kerr Metrics</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Numerical Solver</span>
+                    <span class="spec-tile-val">Runge-Kutta 4th Order (RK4)</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Rendering Speed</span>
+                    <span class="spec-tile-val">140+ Frames/Hour @ 8K UHD</span>
+                  </div>
+                  <div class="spec-tile">
+                    <span class="spec-tile-label">Compute Engine</span>
+                    <span class="spec-tile-val">CUDA 4-Vector Matrix Kernels</span>
+                  </div>
+                </div>
+
+                <div class="product-footer-row">
+                  <div class="product-stack-chips">
+                    <span class="product-chip">Modern C++</span>
+                    <span class="product-chip">CUDA</span>
+                    <span class="product-chip">General Relativity</span>
+                    <span class="product-chip">Null Geodesics</span>
+                    <span class="product-chip">Kerr Metric</span>
+                    <span class="product-chip">RK4</span>
+                    <span class="product-chip">Optics</span>
+                  </div>
+                  <div class="product-cta-row">
+                    <button class="btn btn-outline btn-sm product-preview-btn" data-project-id="relativistic-raytracer" type="button">Showcase ⚡</button>
+                    <a class="btn btn-outline btn-sm" href="https://youtu.be/TMcS_57sPfY" target="_blank" rel="noreferrer">Render Demo (8K) ↗</a>
+                    <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/relativistic-raytracer" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 / Experience -->
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-eyebrow" data-i18n="sec02.eyebrow"><span>02</span> Trajectory</div>
+            <h2 id="experience-title" class="section-title" data-i18n="sec02.title">Experience &amp; Education</h2>
+          </div>
+          <p class="section-desc" data-i18n="sec02.desc">Engineering trajectory across aerospace telemetry, systems R&amp;D, and computer engineering education.</p>
+        </div>
+
+        <div class="timeline-container reveal">
+          <div class="timeline-track" aria-hidden="true"></div>
+
+          <div class="timeline-items">
+            <!-- 01: Long Beach Rocketry (NASA USLI) -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot timeline-dot--active" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">2025 – Present</span>
+                  <span class="timeline-badge timeline-badge--aerospace">Aerospace · NASA USLI</span>
+                  <span class="timeline-location">Long Beach, CA</span>
+                </div>
+                <h3 class="timeline-role">Lead Telemetry &amp; Ground Control Software</h3>
+                <h4 class="timeline-org">Long Beach Rocketry · NASA Student Launch</h4>
+                <p class="timeline-desc">
+                  Architected low-latency C++/LoRa telemetry pipeline with Doppler tracking and Qt Ground Control Station. Reconstructs noisy 915 MHz Semtech SX1262 bitstreams with sub-millisecond FSM frame synchronization and lock-free ring buffer (&lt;20ms latency).
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">C++20</span>
+                  <span class="timeline-tag">LoRa / SX1262</span>
+                  <span class="timeline-tag">Doppler Tracking</span>
+                  <span class="timeline-tag">Qt GCS</span>
+                  <span class="timeline-tag">Lock-Free IPC</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 02: CSULB Study Abroad -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">Aug 2025 – May 2026</span>
+                  <span class="timeline-badge timeline-badge--academic">Academic Exchange</span>
+                  <span class="timeline-location">Long Beach, CA</span>
+                </div>
+                <h3 class="timeline-role">Electrical &amp; Computer Engineering</h3>
+                <h4 class="timeline-org">California State University, Long Beach</h4>
+                <p class="timeline-desc">
+                  Advanced coursework in System-on-Chip (SoC) Design, Computer Logic Systems, Digital Signal Processing (DSP), and Machine Learning &amp; Data Analysis.
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">SoC Design</span>
+                  <span class="timeline-tag">Computer Logic</span>
+                  <span class="timeline-tag">DSP</span>
+                  <span class="timeline-tag">Machine Learning</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 03: X'PROCHEM -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">Apr – Aug 2025</span>
+                  <span class="timeline-badge timeline-badge--industry">Industry R&amp;D</span>
+                  <span class="timeline-location">Lille, FR</span>
+                </div>
+                <h3 class="timeline-role">Software &amp; Systems Engineering Intern</h3>
+                <h4 class="timeline-org">X'PROCHEM (R&amp;D Pharma)</h4>
+                <p class="timeline-desc">
+                  Automated peptide synthesis (LIMS). Reduced PostgreSQL search query latency by 40% with atom-based indexing. Built a 0.0001 Da mass spectrometry anomaly detection engine reducing false positives by 28%.
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">C</span>
+                  <span class="timeline-tag">Python</span>
+                  <span class="timeline-tag">PostgreSQL Indexing</span>
+                  <span class="timeline-tag">Mass Spectrometry</span>
+                  <span class="timeline-tag">LIMS</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 04: Monstock -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">Oct 2023 – Feb 2025</span>
+                  <span class="timeline-badge timeline-badge--industry">Industry</span>
+                  <span class="timeline-location">Reims, FR</span>
+                </div>
+                <h3 class="timeline-role">QA Tester &amp; Android Automation Developer</h3>
+                <h4 class="timeline-org">Monstock (Supply Chain)</h4>
+                <p class="timeline-desc">
+                  Documented 100+ critical bugs (-38% release-blocking defects) and architected a Java/Appium regression test pipeline cutting end-to-end test execution cycles by 55%.
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">Java</span>
+                  <span class="timeline-tag">Appium</span>
+                  <span class="timeline-tag">Android</span>
+                  <span class="timeline-tag">CI/CD Automation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 05: Indium Solutions -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">Jul – Oct 2023</span>
+                  <span class="timeline-badge timeline-badge--industry">Industry</span>
+                  <span class="timeline-location">Maraussan, FR</span>
+                </div>
+                <h3 class="timeline-role">Enterprise App Developer Intern</h3>
+                <h4 class="timeline-org">Indium Solutions (Groupe Cold)</h4>
+                <p class="timeline-desc">
+                  Custom ERP architecture and high-volume stock-import ETL pipeline processing tens of thousands of records per batch with fuzzy deduplication.
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">ETL Architecture</span>
+                  <span class="timeline-tag">Fuzzy Deduplication</span>
+                  <span class="timeline-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 06: Epitech -->
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap">
+                <span class="timeline-dot" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta-row">
+                  <span class="timeline-date-badge">2021 – Expected Jun 2027</span>
+                  <span class="timeline-badge timeline-badge--academic">Master's Degree</span>
+                  <span class="timeline-location">Paris, FR</span>
+                </div>
+                <h3 class="timeline-role">Master’s Degree in Systems &amp; Software Engineering</h3>
+                <h4 class="timeline-org">Epitech — Tek5 Systems Engineering</h4>
+                <p class="timeline-desc">
+                  Low-level C / pure x86-64 assembly reimplementation of libc, Linux binary analysis tools (strace, nm, objdump) via ptrace/ELF64, CUDA GPGPU, signals &amp; Unix IPC.
+                </p>
+                <div class="timeline-tags">
+                  <span class="timeline-tag">C</span>
+                  <span class="timeline-tag">x86-64 Assembly</span>
+                  <span class="timeline-tag">Linux Internals (ptrace/ELF)</span>
+                  <span class="timeline-tag">CUDA</span>
+                  <span class="timeline-tag">POSIX IPC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 / Skills -->
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-eyebrow" data-i18n="sec03.eyebrow"><span>03</span> Toolbox</div>
+            <h2 id="skills-title" class="section-title" data-i18n="sec03.title">Skills &amp; technical stack</h2>
+          </div>
+          <p class="section-desc" data-i18n="sec03.desc">Grounded in first principles: hardware boundaries, deterministic execution, measurable results.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal delay-1">
+            <span class="skill-tag">HW</span>
+            <h3 class="skill-title">Embedded &amp; digital logic</h3>
+            <ul class="skill-list">
+              <li>FPGA (VHDL / Verilog) · Vivado</li>
+              <li>SoC Design &amp; DSP fundamentals</li>
+              <li>Bare-metal C on ARM Cortex-M / ESP32</li>
+              <li>UART · SPI · I²C · CAN · Semtech LoRa</li>
+            </ul>
+          </article>
+          <article class="skill-card reveal delay-2">
+            <span class="skill-tag">SYS</span>
+            <h3 class="skill-title">Systems &amp; HPC</h3>
+            <ul class="skill-list">
+              <li>Linux / Unix internals (10+ years)</li>
+              <li>C · C++20 · x86-64 Assembly</li>
+              <li>CUDA &amp; OpenCL GPGPU acceleration</li>
+              <li>ptrace(2) · ELF64 ABI · POSIX threads &amp; IPC</li>
+            </ul>
+          </article>
+          <article class="skill-card reveal delay-1">
+            <span class="skill-tag">TEL</span>
+            <h3 class="skill-title">Flight telemetry &amp; networking</h3>
+            <ul class="skill-list">
+              <li>NASA USLI Flight Software (FSW)</li>
+              <li>Doppler compensation &amp; SX1262 LoRa</li>
+              <li>Lock-free zero-copy ring buffers</li>
+              <li>CRC-32 hardware validation &amp; Qt GCS</li>
+            </ul>
+          </article>
+          <article class="skill-card reveal delay-2">
+            <span class="skill-tag">SIM</span>
+            <h3 class="skill-title">Numerical &amp; physics simulation</h3>
+            <ul class="skill-list">
+              <li>100M-particle N-Body / SPH in CUDA</li>
+              <li>NASA Standards (NPR-7150.2D / 8739.8B)</li>
+              <li>Leapfrog &amp; Runge-Kutta (RK4) integrators</li>
+              <li>General Relativity geodesics (Kerr/Schwarzschild)</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="skills-langs reveal">
+          <span class="spec-kicker">Languages &amp; Tooling</span>
+          <span>C</span><span>C++20</span><span>CUDA</span><span>Rust</span><span>x86-64 ASM</span><span>VHDL</span><span>Python</span><span>Java</span><span>Bash</span><span>Docker</span><span>Vivado</span><span>GDB / Perf / Nsight</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 / Archive (Engineering Index) -->
+    <section id="archive" class="section" aria-labelledby="archive-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-eyebrow" data-i18n="sec04.eyebrow"><span>04</span> Catalog</div>
+            <h2 id="archive-title" class="section-title" data-i18n="sec04.title">Engineering Project Index</h2>
+          </div>
+          <div class="archive-header-side">
+            <p class="section-desc" data-i18n="sec04.desc">Curated archive of low-level systems, flight telemetry, numerical simulations, and AI architectures.</p>
+            <a class="btn btn-outline btn-sm" href="https://github.com/Luis1454/epitech-portfolio" target="_blank" rel="noreferrer" data-i18n="sec04.repo_btn">
+              Epitech Monorepo (50 builds) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Minimalist Filter Bar -->
+        <div class="index-toolbar">
+          <div class="index-filter-tabs" role="tablist" aria-label="Filter by domain">
+            <button class="index-tab active" type="button" role="tab" data-category="All" aria-selected="true" data-i18n="sec04.tab_all">All (53)</button>
+            <button class="index-tab" type="button" role="tab" data-category="Systems &amp; Kernel" aria-selected="false" data-i18n="sec04.tab_systems">Systems &amp; Kernel</button>
+            <button class="index-tab" type="button" role="tab" data-category="Aerospace &amp; HPC" aria-selected="false" data-i18n="sec04.tab_aero">Aerospace &amp; HPC</button>
+            <button class="index-tab" type="button" role="tab" data-category="Algorithms &amp; AI" aria-selected="false" data-i18n="sec04.tab_ai">Algorithms &amp; AI</button>
+            <button class="index-tab" type="button" role="tab" data-category="Network &amp; Concurrency" aria-selected="false" data-i18n="sec04.tab_net">Concurrency &amp; Net</button>
+            <button class="index-tab" type="button" role="tab" data-category="Scientific Computing" aria-selected="false" data-i18n="sec04.tab_math">Scientific &amp; Math</button>
+          </div>
+
+          <div class="index-search-wrap">
+            <span class="index-search-icon" aria-hidden="true">⌕</span>
+            <input id="archive-search-input" class="index-search-input" type="search" placeholder="Filter by tech or keyword..." aria-label="Filter implementations" autocomplete="off" data-i18n-attr="placeholder:sec04.search_placeholder">
+          </div>
+        </div>
+
+        <!-- Scannable Engineering Table -->
+        <div class="index-table-wrapper">
+          <div class="index-table-head" aria-hidden="true">
+            <span class="col-head col-project" data-i18n="sec04.th_project">Project &amp; Context</span>
+            <span class="col-head col-domain" data-i18n="sec04.th_domain">Domain</span>
+            <span class="col-head col-summary" data-i18n="sec04.th_summary">Implementation &amp; Architecture</span>
+            <span class="col-head col-stack" data-i18n="sec04.th_stack">Core Stack</span>
+            <span class="col-head col-action" data-i18n="sec04.th_action">Repository</span>
+          </div>
+          <div id="index-table-body" class="index-table-body" role="list"></div>
+        </div>
+
+        <div id="index-empty-state" class="index-empty-state" hidden>
+          <p data-i18n="sec04.empty_text">No implementations match your filter.</p>
+          <button id="index-reset-btn" class="btn btn-outline btn-sm" type="button" data-i18n="sec04.empty_btn">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 / Job Offer Matcher & Compatibility Engine -->
+    <section id="matcher" class="section" aria-labelledby="matcher-title">
+      <div class="container">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-eyebrow" data-i18n="matcher.eyebrow"><span>05</span> Compatibility Engine</div>
+            <h2 id="matcher-title" class="section-title" data-i18n="matcher.title">Analyseur d'Offre &amp; Projets Pertinents</h2>
+          </div>
+          <div class="archive-header-side">
+            <p class="section-desc" data-i18n="matcher.desc">
+              Déposez une offre d'emploi ou collez une description : le moteur évalue en direct l'adéquation technique, filtre les compétences validées et extrait les projets GitHub de Luis les plus pertinents.
+            </p>
+          </div>
+        </div>
+
+        <!-- Minimalist Ingestion Toolbar -->
+        <div class="index-toolbar matcher-toolbar">
+          <div class="index-filter-tabs matcher-preset-tabs" role="tablist" aria-label="Presets d'offres">
+            <span class="matcher-toolbar-label" data-i18n="matcher.preset_label">Exemples :</span>
+            <button class="index-tab active" type="button" data-preset="aerospace" data-i18n="matcher.preset_aero">NASA USLI</button>
+            <button class="index-tab" type="button" data-preset="hpc" data-i18n="matcher.preset_hpc">HPC &amp; CUDA</button>
+            <button class="index-tab" type="button" data-preset="kernel" data-i18n="matcher.preset_kernel">Linux Kernel</button>
+            <button class="index-tab" type="button" data-preset="embedded" data-i18n="matcher.preset_embedded">Firmware &amp; FPGA</button>
+            <button class="index-tab" type="button" data-preset="ai" data-i18n="matcher.preset_ai">IA &amp; CFD</button>
+            <button class="index-tab" type="button" data-preset="network" data-i18n="matcher.preset_network">Systèmes Réseau</button>
+          </div>
+
+          <div class="matcher-toolbar-actions">
+            <label class="btn btn-outline btn-sm matcher-file-btn" for="matcher-file-input">
+              <span data-i18n="matcher.import_file">Importer un fichier (PDF / TXT) ↗</span>
+            </label>
+            <input type="file" id="matcher-file-input" class="matcher-file-input" accept=".txt,.md,.pdf,.rtf,.text" aria-hidden="true">
+          </div>
+        </div>
+
+        <!-- Ingestion Dock & Text Area -->
+        <div class="index-table-wrapper matcher-input-dock">
+          <!-- Subtle Drag & Drop Strip -->
+          <div class="matcher-drop-strip" id="matcher-dropzone" tabindex="0" role="button" aria-label="Déposer une offre d'emploi">
+            <div class="matcher-drop-strip-left">
+              <span class="matcher-strip-icon" aria-hidden="true">↳</span>
+              <span class="matcher-strip-text" data-i18n="matcher.drop_text"><strong>Glissez-déposez une offre d'emploi ici</strong> (PDF, TXT, Markdown) ou collez ci-dessous</span>
+            </div>
+            <span class="matcher-strip-tag" data-i18n="matcher.drop_tag">Traitement 100% local</span>
+          </div>
+
+          <div class="matcher-input-body">
+            <textarea id="matcher-job-text" class="matcher-textarea" rows="4" placeholder="Collez ici la description ou les prérequis d'une offre (ex: Embedded Software, C++20, CUDA, LoRa telemetry, Linux kernel, RTOS, lock-free, FPGA, Python...)..." data-i18n-attr="placeholder:matcher.textarea_placeholder"></textarea>
+            
+            <div class="matcher-input-footer">
+              <div class="matcher-footer-buttons">
+                <button id="matcher-btn-analyze" class="btn btn-primary btn-sm" type="button" data-i18n="matcher.btn_analyze">
+                  Analyser l'adéquation
+                </button>
+                <button id="matcher-btn-reset" class="btn btn-ghost btn-sm" type="button" data-i18n="matcher.btn_reset">Effacer</button>
+              </div>
+              <span class="matcher-status-text" id="matcher-status-text" data-i18n="matcher.status">Analyse temps réel active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Display Panel -->
+        <div class="matcher-results" id="matcher-results">
+          <!-- Telemetry Assessment Banner -->
+          <div class="index-table-wrapper matcher-telemetry-banner">
+            <div class="matcher-telemetry-top">
+              <div class="matcher-telemetry-score-box">
+                <div class="matcher-score-digit-wrap">
+                  <span class="matcher-score-digit" id="matcher-score-num">96%</span>
+                  <span class="matcher-score-digit-sub" id="matcher-score-sub" data-i18n="matcher.score_sub">ADÉQUATION</span>
+                </div>
+                <!-- Precision Segmented Progress Bar -->
+                <div class="matcher-convergence-gauge" title="Convergence d'adéquation">
+                  <div class="matcher-gauge-bar" id="matcher-gauge-bar" style="width: 96%;"></div>
+                </div>
+                <!-- Micro Sub-metrics (Vector breakdown) -->
+                <div class="matcher-submetrics-wrap">
+                  <div class="matcher-submetric">
+                    <span class="matcher-submetric-label" data-i18n="matcher.metric_stack">Stack</span>
+                    <span class="matcher-submetric-val" id="matcher-metric-stack-val">98%</span>
+                  </div>
+                  <div class="matcher-submetric">
+                    <span class="matcher-submetric-label" data-i18n="matcher.metric_domain">Domaine</span>
+                    <span class="matcher-submetric-val" id="matcher-metric-domain-val">95%</span>
+                  </div>
+                  <div class="matcher-submetric">
+                    <span class="matcher-submetric-label" data-i18n="matcher.metric_standards">Normes</span>
+                    <span class="matcher-submetric-val" id="matcher-metric-standards-val">94%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="matcher-telemetry-meta">
+                <div class="matcher-badge-row">
+                  <span class="index-domain-badge index-domain-badge--aerospace" id="matcher-domain-badge">Aerospace &amp; Flight Software</span>
+                  <span class="index-domain-badge index-domain-badge--systems" id="matcher-fit-badge">Excellente Adéquation</span>
+                </div>
+                <h3 class="matcher-verdict-title" id="matcher-verdict-title">Profil directement aligné sur vos exigences techniques</h3>
+                <p class="matcher-verdict-desc" id="matcher-verdict-desc">
+                  Ce poste correspond directement au travail de télémétrie vol développé pour NASA Student Launch et à l'architecture C++20 bas niveau.
+                </p>
+              </div>
+
+              <div class="matcher-telemetry-action">
+                <button id="matcher-btn-copy-report" class="btn btn-outline btn-sm" type="button">
+                  <span id="matcher-copy-text" data-i18n="matcher.btn_copy">Copier la synthèse 📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Breakdown Grid with Balanced Proportions -->
+          <div class="matcher-breakdown-layout">
+            <!-- Left Column: Compétences Validées & Expériences Clés -->
+            <div class="index-table-wrapper matcher-card-panel">
+              <div class="matcher-panel-header">
+                <h4 class="matcher-panel-title" data-i18n="matcher.skills_title">Compétences Validées</h4>
+                <span class="index-tag-chip" id="matcher-skills-count">8 détectées</span>
+              </div>
+              <div class="matcher-skills-list" id="matcher-skills-box">
+                <!-- Chips injected dynamically -->
+              </div>
+
+              <div class="matcher-panel-header matcher-panel-header--secondary">
+                <h4 class="matcher-panel-title" data-i18n="matcher.exp_title">Expériences Alignées</h4>
+              </div>
+              <div class="matcher-exp-list" id="matcher-exp-list">
+                <!-- Exp cards injected dynamically -->
+              </div>
+            </div>
+
+            <!-- Right Column: Projets en Accord Direct -->
+            <div class="index-table-wrapper matcher-card-panel">
+              <div class="matcher-panel-header">
+                <h4 class="matcher-panel-title" data-i18n="matcher.proj_title">Projets Ciblés en Accord</h4>
+                <span class="index-tag-chip" id="matcher-proj-count">Top 4</span>
+              </div>
+              <div class="matcher-projects-container" id="matcher-projects-list">
+                <!-- Projects injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 / Contact -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-container reveal">
+          <div class="contact-layout">
+            <div>
+              <div class="section-eyebrow" data-i18n="contact.eyebrow"><span>06</span> Contact</div>
+              <h2 id="contact-title" class="section-title" data-i18n="contact.title">Let's build something deterministic.</h2>
+              <p class="contact-statement" data-i18n="contact.statement">
+                Available for <strong>engineering roles</strong> in the US &amp; Remote — Embedded Systems, Flight Software, High-Performance Computing, or Applied AI.
+              </p>
+              <p class="contact-statement contact-statement--small" data-i18n="contact.statement_sub">
+                F-1 visa (OPT/CPT eligible), J-1 / JPI sponsorship eligible. Academic reference on request (Prof. Dan Cregg, CSULB).
+              </p>
+              <div class="hero-actions contact-actions">
+                <a class="btn btn-primary" href="mailto:luis.fernandes.contact@gmail.com" data-i18n="contact.btn_email">Email me <span aria-hidden="true">→</span></a>
+                <a class="btn btn-outline" href="assets/resume_systems.pdf" target="_blank" rel="noreferrer" data-i18n="contact.btn_resume">Resume (PDF) <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+
+            <div class="contact-links-grid" aria-label="Contact links">
+              <a class="contact-link-card" href="mailto:luis.fernandes.contact@gmail.com">
+                <div><span class="link-label">Email</span><div class="link-val">luis.fernandes.contact@gmail.com</div></div>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a class="contact-link-card" href="https://www.linkedin.com/in/luisfernandes-eng" target="_blank" rel="noreferrer">
+                <div><span class="link-label">LinkedIn</span><div class="link-val">linkedin.com/in/luisfernandes-eng</div></div>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a class="contact-link-card" href="https://github.com/Luis1454" target="_blank" rel="noreferrer">
+                <div><span class="link-label">GitHub</span><div class="link-val">github.com/Luis1454</div></div>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a class="contact-link-card" href="https://www.youtube.com/@_LuisFernandes_/" target="_blank" rel="noreferrer">
+                <div><span class="link-label">YouTube demos</span><div class="link-val">@_LuisFernandes_</div></div>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand" data-i18n="footer.brand">
+        <strong>Luis Fernandes</strong> — Systems &amp; Embedded Software Engineer
+      </div>
+      <div class="footer-domain">
+        <span>© <span id="current-year">2026</span> · luisfernandes.tech</span>
+        <a class="footer-top" href="#top" data-i18n="footer.top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Execution Showcase Modal -->
+  <div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="project-modal-backdrop" id="project-modal-backdrop"></div>
+    <div class="project-modal-dialog">
+      <div class="project-modal-header">
+        <div class="project-modal-title-group">
+          <div class="project-modal-meta">
+            <span id="modal-project-badge" class="index-domain-badge"></span>
+            <span id="modal-project-module" class="project-modal-module"></span>
+          </div>
+          <h3 id="modal-project-title" class="project-modal-title"></h3>
+        </div>
+        <button id="project-modal-close" class="project-modal-close" type="button" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="project-modal-body">
+        <div class="project-modal-visual">
+          <img id="modal-project-img" src="" alt="Execution Terminal Capture" class="project-modal-img">
+        </div>
+
+        <div class="project-modal-info">
+          <div class="modal-info-section">
+            <h4 class="modal-section-title" data-i18n="modal.architecture">Architecture &amp; Conception</h4>
+            <p id="modal-project-summary" class="modal-summary-text"></p>
+          </div>
+
+          <div class="modal-info-section" id="modal-why-section">
+            <h4 class="modal-section-title" data-i18n="modal.significance">Enjeu &amp; Objectif Technique</h4>
+            <p id="modal-project-why" class="modal-why-text"></p>
+          </div>
+
+          <div class="modal-info-section">
+            <h4 class="modal-section-title" data-i18n="modal.stack">Primitives &amp; Technologies</h4>
+            <div id="modal-project-stack" class="modal-chips"></div>
+          </div>
+
+          <div class="modal-info-section" id="modal-metrics-section">
+            <h4 class="modal-section-title" data-i18n="modal.metrics">Télémétrie d'Exécution</h4>
+            <div id="modal-project-metrics" class="modal-metrics-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-modal-footer">
+        <a id="modal-project-github" class="btn btn-primary btn-sm" href="" target="_blank" rel="noreferrer">
+          <span data-i18n="modal.view_repo">Consulter le code source sur GitHub ↗</span>
+        </a>
+        <button id="modal-close-btn" class="btn btn-outline btn-sm" type="button">
+          <span data-i18n="modal.close">Fermer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/data/projects.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
