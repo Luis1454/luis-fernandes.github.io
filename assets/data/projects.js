@@ -1,4 +1,3 @@
-// AUTO-GENERATED UNIFIED PORTFOLIO PROJECT DATABASE
 window.PORTFOLIO_PROJECTS_DATA = [
   {
     "id": "lbr-telemetry",
@@ -52,6 +51,25 @@ window.PORTFOLIO_PROJECTS_DATA = [
     "summary_fr": "Simulateur de propagation de feux de forêt couplant modèle de surface Rothermel, CFD du vent local et analyse de risque Monte Carlo.",
     "github": "https://github.com/Luis1454/pyrocast",
     "screenshot": "assets/project-art/pyrocast.png",
+    "featured": true
+  },
+  {
+    "id": "relativistic-raytracer",
+    "title": "Relativistic Raytracer",
+    "module": "Curved Spacetime Geodesic Engine",
+    "category": "Aerospace & HPC",
+    "domain": "aerospace-hpc",
+    "languages": [
+      "C++20",
+      "CUDA",
+      "General Relativity",
+      "RK4",
+      "Kerr Metric"
+    ],
+    "summary": "Curved-spacetime optical raytracer numerically integrating null geodesic differential equations under General Relativity around spinning Kerr black holes using CUDA four-vector matrices.",
+    "summary_fr": "Raytracer optique en espace-temps courbe intégrant numériquement les équations différentielles de géodésiques nulles selon la Relativité Générale autour de trous noirs de Kerr (RK4).",
+    "demo": "https://youtu.be/TMcS_57sPfY",
+    "screenshot": "assets/project-art/relativistic-raytracer.png",
     "featured": true
   },
   {
@@ -638,22 +656,22 @@ window.PORTFOLIO_PROJECTS_DATA = [
     "featured": false
   },
   {
-    "id": "relativistic-raytracer",
-    "title": "Relativistic Raytracer",
-    "module": "Curved Spacetime Geodesic Engine",
+    "id": "raytracer",
+    "title": "Raytracer 3D",
+    "module": "Multithreaded 3D Raytracing Engine",
     "category": "Aerospace & HPC",
     "domain": "simulations-hpc",
     "languages": [
       "C++20",
-      "CUDA",
-      "General Relativity",
-      "RK4",
-      "Kerr Metric"
+      "Multithreading",
+      "Phong Shading",
+      "SFML",
+      "Raytracing"
     ],
-    "summary": "Optical raytracing simulation modeling photon trajectories along null geodesics in curved spacetime metrics (Schwarzschild and Kerr black holes) using numerical differential integrators.",
-    "summary_fr": "Raytracer optique relativiste résolvant les géodésiques nulles autour de trous noirs de Kerr via Runge-Kutta 4.",
-    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/relativistic-raytracer",
-    "screenshot": "assets/project-art/relativistic-raytracer.png",
+    "summary": "High-performance 3D optical raytracer in C++20 featuring recursive reflection, Phong illumination, shadow projection, post-processing filters, and a multithreaded tile renderer.",
+    "summary_fr": "Moteur de raytracing 3D multithreadé en C++20 avec réflexions récursives, modèle d'illumination de Phong, ombres portées, filtres post-traitement et viewport SFML.",
+    "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/raytracer",
+    "screenshot": "assets/project-art/raytracer.png",
     "featured": false
   },
   {

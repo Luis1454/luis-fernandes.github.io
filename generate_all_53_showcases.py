@@ -986,31 +986,57 @@ PROJECTS_DATA = {
         "status_right": "3D Isometric Projection • Mesh Editing • C"
     },
 
-    "relativistic-raytracer": {
-        "title": "relativistic-raytracer — 3D Raytracing Illumination Engine",
-        "subtitle": "Phong Shading, Specular Reflections & Primitive Geometry",
+    "raytracer": {
+        "title": "raytracer — Multithreaded 3D Raytracing Engine",
+        "subtitle": "Phong Illumination, Shadows, Reflection & Geometric Primitives",
         "badge": "● RAYTRACING 3D",
         "badge_color": C_CYAN,
-        "dir": "~/relativistic-raytracer",
-        "cmd": "./raytracer scenes/specular_spheres.cfg -o render.ppm",
+        "dir": "~/raytracer",
+        "cmd": "./raytracer -sfml scenes/specular_spheres.cfg",
         "lines": [
-            [("[RAYTRACER CORE] ", C_BLUE), ("Parsing scene description: scenes/specular_spheres.cfg", C_TEXT_WHITE)],
-            [("Scene Primitives Loaded:", C_TEXT_DIM)],
+            [("[RAYTRACER ENGINE] ", C_BLUE), ("Initializing C++20 multithreaded tile renderer (32 worker threads)", C_TEXT_WHITE)],
+            [("Scene Primitives Loaded: ", C_TEXT_DIM), ("scenes/specular_spheres.cfg (libconfig format)", C_CYAN)],
             [("  Camera: Pos (0, -100, 20), Target (0, 0, 10), Field of View: 60°", C_TEXT_WHITE)],
             [("  Sphere 1 : Center (-15, 0, 15), Radius: 10, Material: Red Plastic (Shininess 64)", C_RED)],
             [("  Sphere 2 : Center ( 15, 0, 12), Radius:  8, Material: Chrome Mirror (Refl 0.85)", C_CYAN)],
             [("  Plane    : Normal (0, 0, 1), Height: 0, Material: Checkerboard", C_YELLOW)],
             [("  Lights   : Point Light at (0, -40, 50), Color: #FFFFFF, Intensity: 1.2", C_PURPLE)],
             [("", C_TEXT_WHITE)],
-            [("Rendering Pass (1920 x 1080 resolution):", C_TEXT_DIM)],
+            [("Rendering Pass (1920 x 1080 resolution, 100x100 tiles):", C_TEXT_DIM)],
             [("  Primary camera rays cast : 2,073,600 rays", C_TEXT_WHITE)],
-            [("  Secondary reflection rays: 1,420,800 rays (Max bounce recursion: 4)", C_CYAN)],
+            [("  Secondary reflection rays: 1,420,800 rays (Max bounce recursion: 5)", C_CYAN)],
             [("  Shadow obstruction rays  : 2,073,600 rays (Hard shadow evaluation)", C_TEXT_WHITE)],
             [("[OUTPUT] ", C_GREEN, True), ("Rendered image exported to render.ppm (100% complete in 1.42s)", C_GREEN, True)],
-            [("Phong illumination: Ambient + Diffuse (Lambert) + Specular (Blinn-Phong) computed.", C_TEXT_DIM)]
+            [("Phong illumination: Ambient + Diffuse (Lambert) + Specular (Blinn-Phong) | SFML loop active.", C_TEXT_DIM)]
         ],
-        "status_left": "RES: 1920x1080 | RAYS: 5.56M | BOUNCES: 4 | TIME: 1.42s | OUTPUT: PPM OK",
-        "status_right": "Raytracing • Optics & Lighting • C++"
+        "status_left": "RES: 1920x1080 | RAYS: 5.56M | BOUNCES: 5 | THREADS: 32 | TIME: 1.42s | SFML OK",
+        "status_right": "Raytracing • Optics & Lighting • C++20"
+    },
+
+    "relativistic-raytracer": {
+        "title": "relativistic-raytracer — Curved Spacetime Geodesic Engine",
+        "subtitle": "Schwarzschild & Kerr Metrics, RK4 Numerical Integrator & Accretion Lensing",
+        "badge": "● RELATIVISTIC OPTICS",
+        "badge_color": C_PURPLE,
+        "dir": "~/relativistic-raytracer",
+        "cmd": "./relativistic-raytracer --metric kerr --spin 0.9375 --res 7680x4320 --rk4",
+        "lines": [
+            [("[INIT] ", C_BLUE), ("Relativistic Geodesic Engine initialized (M=1.0, spin a=0.9375, FOV=65°)", C_TEXT_WHITE)],
+            [("Spacetime Geometry: ", C_TEXT_DIM), ("Kerr Metric in Boyer-Lindquist coordinates", C_CYAN)],
+            [("  Event Horizon Radius : ", C_TEXT_DIM), ("r+ = 1.348 M  |  Ergosurface: r_ergo = 2.000 M", C_PURPLE)],
+            [("  ISCO Orbit Radius    : ", C_TEXT_DIM), ("r_isco = 2.044 M (Prograde innermost stable circular orbit)", C_TEXT_WHITE)],
+            [("  Accretion Disk Model : ", C_TEXT_DIM), ("Keplerian thin-disk with relativistic Doppler beaming", C_YELLOW)],
+            [("", C_TEXT_WHITE)],
+            [("[INTEGRATOR] ", C_GREEN), ("Solving Carter constant & 4-vector null geodesics via RK4...", C_TEXT_WHITE)],
+            [("  Ray Trajectories Cast: ", C_TEXT_DIM), ("33,177,600 geodesic paths (8K UHD: 7680 x 4320)", C_CYAN)],
+            [("  Adaptive Timestep    : ", C_TEXT_DIM), ("dt = 0.005 M | Conservation of Carter constant: ΔQ/Q0 < 1e-7", C_GREEN)],
+            [("  Gravitational Redshift: ", C_TEXT_DIM), ("Frequency shift factor g = (1 - 2M/r)^0.5 computed per ray", C_TEXT_WHITE)],
+            [("[COMPUTE] ", C_BLUE), ("CUDA 4-Vector Matrix Kernels: 16,384 concurrent threads active", C_TEXT_WHITE)],
+            [("[OUTPUT] ", C_GREEN, True), ("Frame 0042 rendered in 25.4s (142 frames/hr) -> exported to frame_8k.exr", C_GREEN, True)],
+            [("STATUS: Gravitational lensing & photon sphere deflection resolved within tolerances.", C_TEXT_DIM)]
+        ],
+        "status_left": "KERR METRIC a=0.938 | 8K UHD 7680x4320 | RK4 dt=0.005 | 142 FPS/HR | CUDA",
+        "status_right": "Computational Physics • General Relativity • C++20 / CUDA"
     },
 
     "rtype": {

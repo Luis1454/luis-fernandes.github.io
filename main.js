@@ -1704,7 +1704,23 @@ function initProjectModal() {
     }
 
     if (githubLink) {
-      githubLink.href = project.github || "#";
+      if (project.github) {
+        githubLink.href = project.github;
+        githubLink.style.display = "";
+        const spanText = githubLink.querySelector("span");
+        if (spanText) {
+          spanText.textContent = (lang === "fr" ? "Consulter le code source sur GitHub ↗" : "View source on GitHub ↗");
+        }
+      } else if (project.demo) {
+        githubLink.href = project.demo;
+        githubLink.style.display = "";
+        const spanText = githubLink.querySelector("span");
+        if (spanText) {
+          spanText.textContent = (lang === "fr" ? "Voir la démo vidéo (8K) ↗" : "Watch video demo (8K) ↗");
+        }
+      } else {
+        githubLink.style.display = "none";
+      }
     }
 
     modal.classList.add("is-open");
