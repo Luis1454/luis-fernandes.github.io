@@ -1662,7 +1662,7 @@ function initProjectModal() {
     if (titleEl) titleEl.textContent = project.title || "";
 
     if (imgEl) {
-      const shotUrl = project.screenshot || `assets/project-art/${project.id}.png`;
+      const shotUrl = project.screenshot || `assets/project-art/${project.id}.gif`;
       imgEl.src = shotUrl;
       imgEl.alt = `${project.title} - Execution Showcase`;
     }
@@ -1758,6 +1758,16 @@ function initProjectModal() {
       }
     }
   });
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projParam = urlParams.get("project") || (window.location.hash.startsWith("#project-") ? window.location.hash.replace("#project-", "") : null);
+    if (projParam) {
+      openProjectModal(projParam);
+    }
+  } catch (err) {
+    // ignore
+  }
 }
 
 // -----------------------------------------------------------------------------

@@ -87,7 +87,7 @@
     "summary": "Custom lossless data compression and decompression engine targeting text, HTML, and PBM image data via dictionary encoding and frequency-based bit packing.",
     "summary_fr": "Compresseur de données sans perte multi-formats combinant dictionnaires adaptatifs et encodage fréquentiel.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/antman-compression",
-    "screenshot": "assets/project-art/antman-compression.png",
+    "screenshot": "assets/project-art/antman-compression.gif",
     "featured": false
   },
   {
@@ -106,7 +106,7 @@
     "summary": "Bistromatic evaluates deeply nested arithmetic expressions involving numbers of infinite length (constrained only by available system RAM). It features custom big-integer addition, subtraction, multiplication, division, and modulo routines, paired with an operator-precedence expression evaluator.",
     "summary_fr": "Calculatrice BigInt en C évaluant des expressions arithmétiques de longueur arbitraire sans limite de registre.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/bistromatic",
-    "screenshot": "assets/project-art/bistromatic.png",
+    "screenshot": "assets/project-art/bistromatic.gif",
     "featured": false
   },
   {
@@ -124,7 +124,7 @@
     "summary": "High-performance 2D grid processing algorithm finding the largest unobstructed square on a map containing arbitrary obstacles.",
     "summary_fr": "Algorithme d'optimisation par programmation dynamique extrayant le plus grand carré sans obstacle sur grille 2D.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/bsq",
-    "screenshot": "assets/project-art/bsq.png",
+    "screenshot": "assets/project-art/bsq.gif",
     "featured": false
   },
   {
@@ -143,7 +143,7 @@
     "summary": "This repository provides foundational implementations of both symmetric and asymmetric encryption schemes. It emphasizes clean mathematical formulations, modular arithmetic operations, and cryptanalytic tooling to demonstrate vulnerability vectors in weak cipher designs.",
     "summary_fr": "Boîte à outils cryptographique implémentant chiffrements symétriques et asymétriques (RSA, AES) et cryptanalyse.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/cryptography",
-    "screenshot": "assets/project-art/cryptography.png",
+    "screenshot": "assets/project-art/cryptography.gif",
     "featured": false
   },
   {
@@ -161,7 +161,7 @@
     "summary": "High-throughput maze generator creating perfect and imperfect 2D labyrinths paired with optimized A* and Dijkstra pathfinding solvers.",
     "summary_fr": "Générateur et solveur de labyrinthes 2D exploitant les algorithmes de recherche de chemin A* et Dijkstra.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/dante-star",
-    "screenshot": "assets/project-art/dante-star.png",
+    "screenshot": "assets/project-art/dante-star.gif",
     "featured": false
   },
   {
@@ -179,7 +179,7 @@
     "summary": "EvalExpr computes mathematical expressions directly from a character string. By utilizing a recursive descent grammar parser, it eliminates the need for external parsing generators or postfix conversion passes, evaluating values in a single recursive traversal.",
     "summary_fr": "Évaluateur d'expressions arithmétiques en C utilisant une descente récursive pour respecter les priorités opératoires.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/evalexpr",
-    "screenshot": "assets/project-art/evalexpr.png",
+    "screenshot": "assets/project-art/evalexpr.gif",
     "featured": false
   },
   {
@@ -197,7 +197,7 @@
     "summary": "High-throughput bioinformatics command-line utility analyzing FASTA-formatted DNA and RNA sequences, computing k-mer frequencies, and detecting coding sequences.",
     "summary_fr": "Outil bio-informatique analysant les séquences génomiques FASTA, fréquences de k-mers et séquences codantes.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/fastatools",
-    "screenshot": "assets/project-art/fastatools.png",
+    "screenshot": "assets/project-art/fastatools.gif",
     "featured": false
   },
   {
@@ -216,7 +216,7 @@
     "summary": "High-performance Gomoku (Five-in-a-Row) game engine designed for competitive tournament play under the Gomocup protocol. Employs Minimax search with Alpha-Beta pruning, bitboard representations, and heuristic pattern evaluation.",
     "summary_fr": "Moteur d'IA compétitif pour Gomoku exploitant Minimax, élagage Alpha-Beta et représentations par bitboards.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/gomoku-ai",
-    "screenshot": "assets/project-art/gomoku-ai.png",
+    "screenshot": "assets/project-art/gomoku-ai.gif",
     "featured": false
   },
   {
@@ -234,7 +234,7 @@
     "summary": "Arbitrary-precision arithmetic utility performing addition and subtraction on arbitrarily long numerical strings beyond hardware register bounds.",
     "summary_fr": "Additionneur et soustracteur arithmétique de grands entiers au-delà des limites de registres 64 bits.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/infinadd",
-    "screenshot": "assets/project-art/infinadd.png",
+    "screenshot": "assets/project-art/infinadd.gif",
     "featured": false
   },
   {
@@ -253,7 +253,7 @@
     "summary": "Graph optimization engine solving maximum network flow problems for ant colony routing through a network of connected rooms and tunnels.",
     "summary_fr": "Optimisateur de graphes résolvant le problème de flot maximal pour le routage de colonies de fourmis.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/lemin",
-    "screenshot": "assets/project-art/lemin.png",
+    "screenshot": "assets/project-art/lemin.gif",
     "featured": false
   },
   {
@@ -271,7 +271,7 @@
     "summary": "Autonomous vehicle control algorithm driving a simulated car through complex tracks by analyzing real-time 32-beam lidar distance streams and computing adaptive PID steering and speed commands.",
     "summary_fr": "Contrôleur autonome de véhicule analysant un radar Lidar 32 faisceaux pour ajuster vitesse et braquage par PID.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/n4s-autonomous",
-    "screenshot": "assets/project-art/n4s-autonomous.png",
+    "screenshot": "assets/project-art/n4s-autonomous.gif",
     "featured": false
   },
   {
@@ -289,7 +289,7 @@
     "summary": "This project implements a multi-layer feedforward perceptron designed for classification and regression tasks. It implements matrix mathematical operations, activation functions, and reverse-mode automatic differentiation (backpropagation) to optimize network weights via stochastic gradient descent.",
     "summary_fr": "Réseau de neurones perceptron multicouche développé from scratch avec descente de gradient et rétropropagation.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/neural-network",
-    "screenshot": "assets/project-art/neural-network.png",
+    "screenshot": "assets/project-art/neural-network.gif",
     "featured": false
   },
   {
@@ -306,7 +306,7 @@
     "summary": "Highly constrained algorithmic sorting challenge sorting a list of integers across two stacks (l_a and l_b) using a restricted instruction set (sa, sb, pa, pb, ra, rb, rra, rrb).",
     "summary_fr": "Tri contraint à haute efficacité organisant une liste d'entiers sur deux piles avec jeu d'instructions réduit.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/pushswap",
-    "screenshot": "assets/project-art/pushswap.png",
+    "screenshot": "assets/project-art/pushswap.gif",
     "featured": false
   },
   {
@@ -324,7 +324,7 @@
     "summary": "Terminal warehouse box-pushing puzzle engine featuring map validation, real-time keyboard interaction, collision detection, and win/loss condition tracking.",
     "summary_fr": "Moteur de jeu d'entrepôt en terminal avec gestion de collisions et validation de cartes en C / NCurses.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/sokoban",
-    "screenshot": "assets/project-art/sokoban.png",
+    "screenshot": "assets/project-art/sokoban.gif",
     "featured": false
   },
   {
@@ -342,7 +342,7 @@
     "summary": "Trade interacts with simulated or live market exchange APIs, processing tick and candlestick data in real time. It computes technical indicators across rolling windows to detect momentum shifts, trend reversals, and breakout opportunities, automatically issuing market and limit orders.",
     "summary_fr": "Bot de trading algorithmique analysant des flux de chandeliers boursiers en temps réel (EMA, MACD, Bollinger).",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/algorithms-ai/trade",
-    "screenshot": "assets/project-art/trade.png",
+    "screenshot": "assets/project-art/trade.gif",
     "featured": false
   },
   {
@@ -361,7 +361,7 @@
     "summary": "High-throughput distributed computing protocol harnessing low-power IoT devices via Solana and Anchor. Features a containerized C++ ELF binary partitioner and recursive task delegation protocols.",
     "summary_fr": "Grille de calcul décentralisée pour micro-appareils IoT via Solana (Rust/Anchor) et partitionneur ELF C++.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/distributed-systems/silicium-eip",
-    "screenshot": "assets/project-art/silicium-eip.png",
+    "screenshot": "assets/project-art/silicium-eip.gif",
     "featured": false
   },
   {
@@ -379,7 +379,7 @@
     "summary": "Multi-threaded synchronization engine modeling the classic Sleeping Druid / Hungry Villagers concurrency problem using POSIX threads, mutexes, and semaphores.",
     "summary_fr": "Modèle de synchronisation concurrente multithread avec threads POSIX, sémaphores et variables de condition.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/network-devops/panoramix",
-    "screenshot": "assets/project-art/panoramix.png",
+    "screenshot": "assets/project-art/panoramix.gif",
     "featured": false
   },
   {
@@ -397,7 +397,7 @@
     "summary": "Enterprise multi-service voting application containerized using Docker, Docker Compose, and multi-stage container builds.",
     "summary_fr": "Architecture de microservices conteneurisés orchestrant vote, résultat et base de données via Docker Compose.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/network-devops/popeye",
-    "screenshot": "assets/project-art/popeye.png",
+    "screenshot": "assets/project-art/popeye.gif",
     "featured": false
   },
   {
@@ -415,7 +415,7 @@
     "summary": "The Plazza simulates a high-throughput order dispatching and processing facility. A main reception engine receives order inputs, analyzes workload metrics, and dynamically spawns kitchen subprocesses. Each kitchen manages a fixed thread pool to cook items concurrently while IPC channels maintain bidirectional state synchronization.",
     "summary_fr": "Orchestrateur multi-processus et multithread en C++ équilibrant les charges via IPC (tubes nommés) et pools de threads.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/network-devops/the-plazza",
-    "screenshot": "assets/project-art/the-plazza.png",
+    "screenshot": "assets/project-art/the-plazza.gif",
     "featured": false
   },
   {
@@ -434,7 +434,7 @@
     "summary": "Zappy models an alien civilization surviving on a grid-based resource world (`Trantor`). The system comprises three independently communicating components synchronized via a strict custom TCP protocol:",
     "summary_fr": "Serveur de simulation TCP asynchrone en C avec multiplexage select/poll, agents IA autonomes et rendu 3D.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/network-devops/zappy",
-    "screenshot": "assets/project-art/zappy.png",
+    "screenshot": "assets/project-art/zappy.gif",
     "featured": false
   },
   {
@@ -452,7 +452,7 @@
     "summary": "Computational chemistry utility calculating equivalence points in acid-base titration experiments using cubic spline interpolation and numerical differentiation.",
     "summary_fr": "Analyse numérique par dérivation de courbes de titrage acido-basique et calcul du point d'équivalence pH.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/109titration",
-    "screenshot": "assets/project-art/109titration.png",
+    "screenshot": "assets/project-art/109titration.gif",
     "featured": false
   },
   {
@@ -470,7 +470,7 @@
     "summary": "Real-time rolling telemetry stream processor detecting trend switches, standard deviations, and temperature switches across temporal data feeds.",
     "summary_fr": "Analyse statistique de données boursières et environnementales détectant les inversions de tendance en temps réel.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/groundhog",
-    "screenshot": "assets/project-art/groundhog.png",
+    "screenshot": "assets/project-art/groundhog.gif",
     "featured": false
   },
   {
@@ -488,7 +488,7 @@
     "summary": "This repository aggregates applied scientific computing algorithms implemented in Python and C. Each sub-module addresses a specific analytical problem spanning kinematics, projective geometry, matrix inversions, non-linear root finding, discrete chaotic dynamical systems, Laplace transfer functions, and higher-order Taylor expansions.",
     "summary_fr": "Suite de méthodes numériques et calcul scientifique : intégration numérique, algèbre linéaire et cinématique.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/math-algorithms",
-    "screenshot": "assets/project-art/math-algorithms.png",
+    "screenshot": "assets/project-art/math-algorithms.gif",
     "featured": false
   },
   {
@@ -506,7 +506,7 @@
     "summary": "Number theory utility computing forward and reverse palindrome iteration counts across various numerical bases (from base 2 to base 36).",
     "summary_fr": "Résolution arithmétique de palindromes et transformations de bases numériques en théorie des nombres.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/palindrome",
-    "screenshot": "assets/project-art/palindrome.png",
+    "screenshot": "assets/project-art/palindrome.gif",
     "featured": false
   },
   {
@@ -524,7 +524,7 @@
     "summary": "Automated black-box test runner validating binary standard output, error streams, and exit codes against expected reference specifications.",
     "summary_fr": "Framework d'automatisation de tests d'intégration pour exécutables en environnement terminal.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/projtester",
-    "screenshot": "assets/project-art/projtester.png",
+    "screenshot": "assets/project-art/projtester.gif",
     "featured": false
   },
   {
@@ -542,7 +542,7 @@
     "summary": "XML lexical parser and analyzer for Systems Biology Markup Language (SBML) files, extracting biochemical species, compartments, and kinetic reactions.",
     "summary_fr": "Analyseur syntaxique de balises SBML pour réseaux biochimiques et modélisation de systèmes biologiques.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/scientific-computing/sbmlparser",
-    "screenshot": "assets/project-art/sbmlparser.png",
+    "screenshot": "assets/project-art/sbmlparser.gif",
     "featured": false
   },
   {
@@ -561,7 +561,7 @@
     "summary": "Arcade solves the problem of cross-toolkit graphics abstraction by operating entirely through dynamic shared libraries loaded at runtime (`dlopen(3)`, `dlsym(3)`). The core engine manages event dispatching and entity states, allowing users to switch graphic libraries (e.g. from SFML to SDL2 or an NCurses terminal interface) and game cartridges (Snake, Nibbler, Pacman) on the fly without restarting or recompiling.",
     "summary_fr": "Plateforme de jeux modulaire en C++ découplant moteur et moteurs de rendu via chargement dynamique (dlopen/dlsym).",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/arcade",
-    "screenshot": "assets/project-art/arcade.png",
+    "screenshot": "assets/project-art/arcade.gif",
     "featured": false
   },
   {
@@ -579,7 +579,7 @@
     "summary": "2D Arcade shooter featuring hardware-accelerated sprite animation, event-driven user interaction, frame rate regulation, and high-score tracking.",
     "summary_fr": "Jeu 2D de tir en C / CSFML avec boucle de rafraîchissement temps réel et animations de sprites.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/myhunter",
-    "screenshot": "assets/project-art/myhunter.png",
+    "screenshot": "assets/project-art/myhunter.gif",
     "featured": false
   },
   {
@@ -597,7 +597,7 @@
     "summary": "GUI drawing application featuring modular tool palettes, layer manipulation, custom brush dynamics, and color selection.",
     "summary_fr": "Éditeur graphique matriciel en C / CSFML avec canevas interactif, calques et palette d'outils de dessin.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/mypaint",
-    "screenshot": "assets/project-art/mypaint.png",
+    "screenshot": "assets/project-art/mypaint.gif",
     "featured": false
   },
   {
@@ -615,7 +615,7 @@
     "summary": "2D Air traffic control simulation visualizing flight trajectories, control tower radii, and real-time aircraft collision detection using spatial Quadtree partitioning.",
     "summary_fr": "Simulateur de trafic aérien temps réel avec détection spatiale accélérée par partitionnement en Quadtree.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/myradar",
-    "screenshot": "assets/project-art/myradar.png",
+    "screenshot": "assets/project-art/myradar.gif",
     "featured": false
   },
   {
@@ -633,7 +633,7 @@
     "summary": "myRPG is an interactive role-playing game developed from first principles in C. The architecture isolates the rendering loop, input handling, entity management, and user interface layers, delivering smooth 60 FPS performance with custom particle emitters and modular dialogue systems.",
     "summary_fr": "Moteur de jeu de rôle complet en C / CSFML avec automate d'états, collisions par tuiles, quêtes et inventaire.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/myrpg",
-    "screenshot": "assets/project-art/myrpg.png",
+    "screenshot": "assets/project-art/myrpg.gif",
     "featured": false
   },
   {
@@ -652,7 +652,7 @@
     "summary": "myWorld allows users to generate, visualize, and sculpt three-dimensional terrain maps in real time. It calculates mathematical projections to transform 3D grid vertices into a 2D isometric viewport, providing intuitive elevation controls and texture mapping.",
     "summary_fr": "Éditeur de terrain 3D isométrique en C / CSFML avec matrices de projection et sculpture de maillages d'altitude.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/myworld",
-    "screenshot": "assets/project-art/myworld.png",
+    "screenshot": "assets/project-art/myworld.gif",
     "featured": false
   },
   {
@@ -671,7 +671,7 @@
     "summary": "High-performance 3D optical raytracer in C++20 featuring recursive reflection, Phong illumination, shadow projection, post-processing filters, and a multithreaded tile renderer.",
     "summary_fr": "Moteur de raytracing 3D multithreadé en C++20 avec réflexions récursives, modèle d'illumination de Phong, ombres portées, filtres post-traitement et viewport SFML.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/raytracer",
-    "screenshot": "assets/project-art/raytracer.png",
+    "screenshot": "assets/project-art/raytracer.gif",
     "featured": false
   },
   {
@@ -690,7 +690,7 @@
     "summary": "R-Type replicates the classic side-scrolling arcade shooter as a distributed, networked multiplayer platform. The engine is architected around an in-house Entity-Component-System (ECS) model to ensure deterministic game state updates, high cache locality, and scalable concurrency across client and server runtimes.",
     "summary_fr": "Moteur de jeu multijoueur réseau en C++20 sur architecture Entity-Component-System (ECS) et protocole UDP/TCP.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/rtype",
-    "screenshot": "assets/project-art/rtype.png",
+    "screenshot": "assets/project-art/rtype.gif",
     "featured": false
   },
   {
@@ -708,7 +708,7 @@
     "summary": "Modular real-time screensaver rendering procedural visual animations, trigonometric waves, and particle physics in CSFML.",
     "summary_fr": "Moteur d'animations graphiques procédurales en C / CSFML basé sur le calcul vectoriel et trigonométrique.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/screensaver",
-    "screenshot": "assets/project-art/screensaver.png",
+    "screenshot": "assets/project-art/screensaver.gif",
     "featured": false
   },
   {
@@ -726,7 +726,7 @@
     "summary": "Object-oriented discrete electronic component and digital logic circuit simulation engine in C++20. Parses Netlist component topologies and evaluates cyclic graph state propagation across discrete clock cycles.",
     "summary_fr": "Simulateur de circuits électroniques logiques modélisant la propagation d'état sur graphes de portes booléennes.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/tekspice",
-    "screenshot": "assets/project-art/tekspice.png",
+    "screenshot": "assets/project-art/tekspice.gif",
     "featured": false
   },
   {
@@ -744,7 +744,7 @@
     "summary": "This implementation features a robust terminal UI engine running in raw terminal mode, completely detached from line buffering. It dynamically loads external tetromino shape definition files, validates geometries, and drives standard game mechanics (rotation, line clears, score scaling, speed ramping).",
     "summary_fr": "Jeu Tetris en terminal en pur C avec NCurses, mode raw sans mise en mémoire tampon et matrices de collision.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/simulations-hpc/tetris",
-    "screenshot": "assets/project-art/tetris.png",
+    "screenshot": "assets/project-art/tetris.gif",
     "featured": false
   },
   {
@@ -763,7 +763,7 @@
     "summary": "Complete Unix command language interpreter engineered in C. Features Abstract Syntax Tree (AST) lexical parsing, multi-process pipeline orchestration, signal handling, and interactive terminal job control.",
     "summary_fr": "Shell Unix complet conforme POSIX avec analyse lexicale AST, contrôle de tâches (jobs), tubes multi-processus et built-ins.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/42sh",
-    "screenshot": "assets/project-art/42sh.png",
+    "screenshot": "assets/project-art/42sh.gif",
     "featured": false
   },
   {
@@ -781,7 +781,7 @@
     "summary": "Clean-room implementation of standard C library memory and string primitives written entirely in pure x86-64 assembly, strictly adhering to the System V AMD64 ABI specification.",
     "summary_fr": "Primitives mémoire et chaînes de la libc réimplémentées en pur assembleur x86-64 sous la convention System V ABI.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/asm-minilibc",
-    "screenshot": "assets/project-art/asm-minilibc.png",
+    "screenshot": "assets/project-art/asm-minilibc.gif",
     "featured": false
   },
   {
@@ -800,7 +800,7 @@
     "summary": "Piscine C intensive systems programming immersion track covering low-level memory allocation, pointer mechanics, custom standard libc routines, linked lists, POSIX file descriptor I/O, and recursive algorithms without standard library dependencies.",
     "summary_fr": "Piscine C d'immersion intensive en programmation système : allocation bas-niveau, arithmétique de pointeurs, réimplémentation de la libc, listes chaînées et E/S POSIX.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/c-pool",
-    "screenshot": "assets/project-art/c-pool.png",
+    "screenshot": "assets/project-art/c-pool.gif",
     "featured": false
   },
   {
@@ -819,7 +819,7 @@
     "summary": "Corewar is composed of two primary subsystems:",
     "summary_fr": "Machine virtuelle et assembleur deux passes exécutant des champions concurrents dans une arène circulaire de 6 Ko.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/corewar",
-    "screenshot": "assets/project-art/corewar.png",
+    "screenshot": "assets/project-art/corewar.gif",
     "featured": false
   },
   {
@@ -838,7 +838,7 @@
     "summary": "Piscine C++ intensive immersion track covering object-oriented paradigms, RAII lifecycle guarantees, operator overloading, stream I/O, runtime polymorphism, virtual method dispatch tables (vtables), template metaprogramming, and STL algorithms.",
     "summary_fr": "Piscine C++ d'immersion intensive : paradigmes orientés objet, garanties RAII, polymorphisme d'exécution (vtables), programmation générique par templates et STL.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/cpp-pool",
-    "screenshot": "assets/project-art/cpp-pool.png",
+    "screenshot": "assets/project-art/cpp-pool.gif",
     "featured": false
   },
   {
@@ -857,7 +857,7 @@
     "summary": "Process execution tracer capturing user-space function calls, shared library jumps, and system call boundaries using runtime software breakpoints and symbol resolution.",
     "summary_fr": "Traceur dynamique d'appels de fonctions ELF64 et graphe d'exécution via interception ptrace(2).",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/ftrace",
-    "screenshot": "assets/project-art/ftrace.png",
+    "screenshot": "assets/project-art/ftrace.gif",
     "featured": false
   },
   {
@@ -876,7 +876,7 @@
     "summary": "Fundamental Unix shell engine handling user input tokenization, child process execution lifecycle, PATH resolution, and built-in commands.",
     "summary_fr": "Interpréteur de commandes fondamental gérant cycle fork/execve, résolution de PATH et gestion des signaux.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/minishell1",
-    "screenshot": "assets/project-art/minishell1.png",
+    "screenshot": "assets/project-art/minishell1.gif",
     "featured": false
   },
   {
@@ -894,7 +894,7 @@
     "summary": "Advanced Unix command interpreter supporting inter-process communication pipelines, file descriptor redirection, and persistent environment variable management.",
     "summary_fr": "Orchestrateur de processus Unix avec arborescences d'exécution, cascades de pipes et redirections complexes.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/minishell2",
-    "screenshot": "assets/project-art/minishell2.png",
+    "screenshot": "assets/project-art/minishell2.gif",
     "featured": false
   },
   {
@@ -912,7 +912,7 @@
     "summary": "High-performance directory listing utility reproducing GNU `ls` behavior. Queries filesystem metadata, formats permissions, file owners, modification timestamps, and directory hierarchies.",
     "summary_fr": "Clone de ls conforme POSIX listant flux de répertoires, droits d'accès et métadonnées de nœuds d'index.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/my-ls",
-    "screenshot": "assets/project-art/my-ls.png",
+    "screenshot": "assets/project-art/my-ls.gif",
     "featured": false
   },
   {
@@ -930,7 +930,7 @@
     "summary": "Complete reimplementation of the standard C library `printf` formatted I/O function, handling variadic argument lists with custom buffer management.",
     "summary_fr": "Moteur de formatage de chaînes réentrant sans allocation dynamique avec gestion d'arguments variadiques.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/my-printf",
-    "screenshot": "assets/project-art/my-printf.png",
+    "screenshot": "assets/project-art/my-printf.gif",
     "featured": false
   },
   {
@@ -948,7 +948,7 @@
     "summary": "Terminal-based multiplayer Battleship game communicating strictly through POSIX user signals (`SIGUSR1` and `SIGUSR2`) without network sockets or pipes.",
     "summary_fr": "Bataille navale en terminal synchronisant deux processus exclusivement via les signaux POSIX SIGUSR1 et SIGUSR2.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/navy",
-    "screenshot": "assets/project-art/navy.png",
+    "screenshot": "assets/project-art/navy.gif",
     "featured": false
   },
   {
@@ -966,7 +966,7 @@
     "summary": "Binary inspection toolchain analyzing Executable and Linkable Format (ELF64) files. Decodes section headers, symbol tables (`.symtab`), string tables (`.strtab`), and memory segment layouts.",
     "summary_fr": "Outils d'introspection de binaires ELF64 analysant tables des symboles et sections de code machine.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/nm-objdump",
-    "screenshot": "assets/project-art/nm-objdump.png",
+    "screenshot": "assets/project-art/nm-objdump.gif",
     "featured": false
   },
   {
@@ -984,7 +984,7 @@
     "summary": "Native Linux binary introspection utility intercepting kernel system calls, signal deliveries, and process state transitions using `ptrace(2)` and ELF64 architecture inspection.",
     "summary_fr": "Traceur d'appels système interceptant en temps réel les transitions kernel-space et signaux d'un processus.",
     "github": "https://github.com/Luis1454/epitech-portfolio/tree/main/projects/systems-kernel/strace",
-    "screenshot": "assets/project-art/strace.png",
+    "screenshot": "assets/project-art/strace.gif",
     "featured": false
   }
 ]
